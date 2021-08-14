@@ -1,9 +1,5 @@
 unit DAVLib.SimpleTypesHelper;
 
-/// <summary>
-/// Helpers for simple data types
-/// </summary>
-
 interface
 
 uses
@@ -33,20 +29,20 @@ type
     function Log(aBase: Single): Single;
     function Log10: Single;
     function Sqrt: Single;
-    function Inverse: Single; { inverse : r := 1 / z }
+    function Inverse: Single; 
     function Power(ADegree: Single): Single;
-    function Cos: Single; // cosine
-    function Sin: Single; // sinus
-    function Tan: Single; // tangent
-    function ArcCos: Single; // inverse cosine
-    function ArcSin: Single; // inverse sinus
-    function ArcTan: Single; // inverse tangent
-    function Cosh: Single; // hyperbolic cosine
-    function Sinh: Single; // hyperbolic sinus
-    function Tanh: Single; // hyperbolic tangent
-    function ArcCosh: Single; // inverse hyperbolic cosine
-    function ArcSinh: Single; // inverse hyperbolic sinus
-    function ArcTanh: Single; // inverse hyperbolic tangent
+    function Cos: Single; 
+    function Sin: Single; 
+    function Tan: Single; 
+    function ArcCos: Single; 
+    function ArcSin: Single; 
+    function ArcTan: Single; 
+    function Cosh: Single; 
+    function Sinh: Single; 
+    function Tanh: Single; 
+    function ArcCosh: Single; 
+    function ArcSinh: Single; 
+    function ArcTanh: Single; 
     function PowerOfTwo: Single;
     function ToDB(const InPower: Boolean): Single;
     function ToTimes(const InPower: Boolean): Single;
@@ -82,20 +78,20 @@ type
     function Log(aBase: Double): Double;
     function Log10: Double;
     function Sqrt: Double;
-    function Inverse: Double; { inverse : r := 1 / z }
+    function Inverse: Double; 
     function Power(ADegree: Double): Double;
-    function Cos: Double; // cosine
-    function Sin: Double; // sinus
-    function Tan: Double; // tangent
-    function ArcCos: Double; // inverse cosine
-    function ArcSin: Double; // inverse sinus
-    function ArcTan: Double; // inverse tangent
-    function Cosh: Double; // hyperbolic cosine
-    function Sinh: Double; // hyperbolic sinus
-    function Tanh: Double; // hyperbolic tangent
-    function ArcCosh: Double; // inverse hyperbolic cosine
-    function ArcSinh: Double; // inverse hyperbolic sinus
-    function ArcTanh: Double; // inverse hyperbolic tangent
+    function Cos: Double; 
+    function Sin: Double; 
+    function Tan: Double; 
+    function ArcCos: Double; 
+    function ArcSin: Double; 
+    function ArcTan: Double; 
+    function Cosh: Double; 
+    function Sinh: Double; 
+    function Tanh: Double; 
+    function ArcCosh: Double; 
+    function ArcSinh: Double; 
+    function ArcTanh: Double; 
     function PowerOfTwo: Double;
     function ToDB(const InPower: Boolean): Double;
     function ToTimes(const InPower: Boolean): Double;
@@ -131,20 +127,20 @@ type
     function Log(aBase: Extended): Extended;
     function Log10: Extended;
     function Sqrt: Extended;
-    function Inverse: Extended; { inverse : r := 1 / z }
+    function Inverse: Extended; 
     function Power(ADegree: Extended): Extended;
-    function Cos: Extended; // cosine
-    function Sin: Extended; // sinus
-    function Tan: Extended; // tangent
-    function ArcCos: Extended; // inverse cosine
-    function ArcSin: Extended; // inverse sinus
-    function ArcTan: Extended; // inverse tangent
-    function Cosh: Extended; // hyperbolic cosine
-    function Sinh: Extended; // hyperbolic sinus
-    function Tanh: Extended; // hyperbolic tangent
-    function ArcCosh: Extended; // inverse hyperbolic cosine
-    function ArcSinh: Extended; // inverse hyperbolic sinus
-    function ArcTanh: Extended; // inverse hyperbolic tangent
+    function Cos: Extended; 
+    function Sin: Extended; 
+    function Tan: Extended; 
+    function ArcCos: Extended; 
+    function ArcSin: Extended; 
+    function ArcTan: Extended; 
+    function Cosh: Extended; 
+    function Sinh: Extended; 
+    function Tanh: Extended; 
+    function ArcCosh: Extended; 
+    function ArcSinh: Extended; 
+    function ArcTanh: Extended; 
     function PowerOfTwo: Extended;
     function ToDB(const InPower: Boolean): Extended;
     function ToTimes(const InPower: Boolean): Extended;
@@ -173,20 +169,20 @@ type
     function Log(aBase: Extended): Extended;
     function Log10: Extended;
     function Sqrt: Extended;
-    function Inverse: Extended; { inverse : r := 1 / z }
+    function Inverse: Extended; 
     function Power(ADegree: Extended): Extended;
-    function Cos: Extended; // cosine
-    function Sin: Extended; // sinus
-    function Tan: Extended; // tangent
-    function ArcCos: Extended; // inverse cosine
-    function ArcSin: Extended; // inverse sinus
-    function ArcTan: Extended; // inverse tangent
-    function Cosh: Extended; // hyperbolic cosine
-    function Sinh: Extended; // hyperbolic sinus
-    function Tanh: Extended; // hyperbolic tangent
-    function ArcCosh: Extended; // inverse hyperbolic cosine
-    function ArcSinh: Extended; // inverse hyperbolic sinus
-    function ArcTanh: Extended; // inverse hyperbolic tangent
+    function Cos: Extended; 
+    function Sin: Extended; 
+    function Tan: Extended; 
+    function ArcCos: Extended; 
+    function ArcSin: Extended; 
+    function ArcTan: Extended; 
+    function Cosh: Extended; 
+    function Sinh: Extended; 
+    function Tanh: Extended; 
+    function ArcCosh: Extended; 
+    function ArcSinh: Extended; 
+    function ArcTanh: Extended; 
     function Pointer: PInteger;
     function ToString: string;
   end;
@@ -212,8 +208,6 @@ begin
     end;
   end;
 end;
-
-  { TSingleHelper }
 
 function TSingleHelper.Abs: Single;
 begin
@@ -451,8 +445,6 @@ begin
   Result := Self * (180 / PI);
 end;
 
-{ TDoubleHelper }
-
 function TDoubleHelper.PowerOfTwo: Double;
 begin
   Result := System.Math.Log2(Self);
@@ -688,8 +680,6 @@ procedure TDoubleHelper.Zero;
 begin
   Self := ZeroValue;
 end;
-
-{ TExtendedHelper }
 
 function TExtendedHelper.PowerOfTwo: Extended;
 begin
@@ -927,8 +917,6 @@ begin
   Self := ZeroValue;
 end;
 
-{ TIntegerHelper }
-
 function TIntegerHelper.Abs: Integer;
 begin
   Result := System.Abs(Self);
@@ -1086,3 +1074,4 @@ end;
 
 end.
 
+ 

@@ -1,9 +1,5 @@
 unit DAVLib.ComplexType;
 
-/// <summary>
-/// Complex math library
-/// </summary>
-
 interface
 
 uses
@@ -32,10 +28,10 @@ type
     class operator Negative(const A: TDComplex): TDComplex;
     class operator Positive(const A: TDComplex): TDComplex;
     class operator Subtract(const A, B: TDComplex): TDComplex;
-    class operator GreaterThan(const A, B: TDComplex): Boolean; // GreaterThan
-    class operator GreaterThanOrEqual(const A, B: TDComplex): Boolean; // GreaterThanOrEqual
-    class operator LessThan(const A, B: TDComplex): Boolean; // LessThan
-    class operator LessThanOrEqual(const A, B: TDComplex): Boolean; // LessThanOrEqual
+    class operator GreaterThan(const A, B: TDComplex): Boolean;
+    class operator GreaterThanOrEqual(const A, B: TDComplex): Boolean;
+    class operator LessThan(const A, B: TDComplex): Boolean;
+    class operator LessThanOrEqual(const A, B: TDComplex): Boolean;
     procedure Inc;
     procedure Dec;
     function Trunc: TDComplex;
@@ -53,22 +49,22 @@ type
     function Exp: TDComplex;
     function Ln: TDComplex;
     function Sqrt: TDComplex;
-    function Inverse: TDComplex; { inverse : r := 1 / z }
+    function Inverse: TDComplex;
     function Power(const ADegree: Double): TDComplex; overload;
     function Power(const ADegree: TDComplex): TDComplex; overload;
     class function Power(const AValue: Double; const ADegree: TDComplex): TDComplex; overload; static;
-    function Cos: TDComplex; // cosine
-    function Sin: TDComplex; // sinus
-    function Tan: TDComplex; // tangent
-    function ArcCos: TDComplex; // inverse cosine
-    function ArcSin: TDComplex; // inverse sinus
-    function ArcTan: TDComplex; // inverse tangent
-    function Cosh: TDComplex; // hyperbolic cosine
-    function Sinh: TDComplex; // hyperbolic sinus
-    function Tanh: TDComplex; // hyperbolic tangent
-    function ArcCosh: TDComplex; // inverse hyperbolic cosine
-    function ArcSinh: TDComplex; // inverse hyperbolic sinus
-    function ArcTanh: TDComplex; // inverse hyperbolic tangent
+    function Cos: TDComplex;
+    function Sin: TDComplex;
+    function Tan: TDComplex;
+    function ArcCos: TDComplex;
+    function ArcSin: TDComplex;
+    function ArcTan: TDComplex;
+    function Cosh: TDComplex;
+    function Sinh: TDComplex;
+    function Tanh: TDComplex;
+    function ArcCosh: TDComplex;
+    function ArcSinh: TDComplex;
+    function ArcTanh: TDComplex;
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -111,11 +107,11 @@ type
     class operator Negative(const A: TSComplex): TSComplex;
     class operator Positive(const A: TSComplex): TSComplex;
     class operator Subtract(const A, B: TSComplex): TSComplex;
-    class operator GreaterThan(const A, B: TSComplex): Boolean; // GreaterThan
+    class operator GreaterThan(const A, B: TSComplex): Boolean;
     class operator GreaterThanOrEqual(const A, B: TSComplex): Boolean;
-    // GreaterThanOrEqual
-    class operator LessThan(const A, B: TSComplex): Boolean; // LessThan
-    class operator LessThanOrEqual(const A, B: TSComplex): Boolean; // LessThanOrEqual
+
+    class operator LessThan(const A, B: TSComplex): Boolean;
+    class operator LessThanOrEqual(const A, B: TSComplex): Boolean;
     procedure Inc;
     procedure Dec;
     function Trunc: TSComplex;
@@ -133,22 +129,22 @@ type
     function Exp: TSComplex;
     function Ln: TSComplex;
     function Sqrt: TSComplex;
-    function Inverse: TSComplex; { inverse : r := 1 / z }
+    function Inverse: TSComplex;
     function Power(const ADegree: Single): TSComplex; overload;
     function Power(const ADegree: TSComplex): TSComplex; overload;
     class function Power(const AValue: Single; const ADegree: TSComplex): TSComplex; overload; static;
-    function Cos: TSComplex; // cosine
-    function Sin: TSComplex; // sinus
-    function Tan: TSComplex; // tangent
-    function ArcCos: TSComplex; // inverse cosine
-    function ArcSin: TSComplex; // inverse sinus
-    function ArcTan: TSComplex; // inverse tangent
-    function Cosh: TSComplex; // hyperbolic cosine
-    function Sinh: TSComplex; // hyperbolic sinus
-    function Tanh: TSComplex; // hyperbolic tangent
-    function ArcCosh: TSComplex; // inverse hyperbolic cosine
-    function ArcSinh: TSComplex; // inverse hyperbolic sinus
-    function ArcTanh: TSComplex; // inverse hyperbolic tangent
+    function Cos: TSComplex;
+    function Sin: TSComplex;
+    function Tan: TSComplex;
+    function ArcCos: TSComplex;
+    function ArcSin: TSComplex;
+    function ArcTan: TSComplex;
+    function Cosh: TSComplex;
+    function Sinh: TSComplex;
+    function Tanh: TSComplex;
+    function ArcCosh: TSComplex;
+    function ArcSinh: TSComplex;
+    function ArcTanh: TSComplex;
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -191,10 +187,10 @@ type
     class operator Negative(const A: TEComplex): TEComplex;
     class operator Positive(const A: TEComplex): TEComplex;
     class operator Subtract(const A, B: TEComplex): TEComplex;
-    class operator GreaterThan(const A, B: TEComplex): Boolean; // GreaterThan
-    class operator GreaterThanOrEqual(const A, B: TEComplex): Boolean; // GreaterThanOrEqual
-    class operator LessThan(const A, B: TEComplex): Boolean; // LessThan
-    class operator LessThanOrEqual(const A, B: TEComplex): Boolean; // LessThanOrEqual
+    class operator GreaterThan(const A, B: TEComplex): Boolean;
+    class operator GreaterThanOrEqual(const A, B: TEComplex): Boolean;
+    class operator LessThan(const A, B: TEComplex): Boolean;
+    class operator LessThanOrEqual(const A, B: TEComplex): Boolean;
     procedure Inc;
     procedure Dec;
     function Trunc: TEComplex;
@@ -212,22 +208,22 @@ type
     function Exp: TEComplex;
     function Ln: TEComplex;
     function Sqrt: TEComplex;
-    function Inverse: TEComplex; { inverse : r := 1 / z }
+    function Inverse: TEComplex;
     function Power(const ADegree: Extended): TEComplex; overload;
     function Power(const ADegree: TEComplex): TEComplex; overload;
     class function Power(const AValue: Extended; const ADegree: TEComplex): TEComplex; overload; static;
-    function Cos: TEComplex; // cosine
-    function Sin: TEComplex; // sinus
-    function Tan: TEComplex; // tangent
-    function ArcCos: TEComplex; // inverse cosine
-    function ArcSin: TEComplex; // inverse sinus
-    function ArcTan: TEComplex; // inverse tangent
-    function Cosh: TEComplex; // hyperbolic cosine
-    function Sinh: TEComplex; // hyperbolic sinus
-    function Tanh: TEComplex; // hyperbolic tangent
-    function ArcCosh: TEComplex; // inverse hyperbolic cosine
-    function ArcSinh: TEComplex; // inverse hyperbolic sinus
-    function ArcTanh: TEComplex; // inverse hyperbolic tangent
+    function Cos: TEComplex;
+    function Sin: TEComplex;
+    function Tan: TEComplex;
+    function ArcCos: TEComplex;
+    function ArcSin: TEComplex;
+    function ArcTan: TEComplex;
+    function Cosh: TEComplex;
+    function Sinh: TEComplex;
+    function Tanh: TEComplex;
+    function ArcCosh: TEComplex;
+    function ArcSinh: TEComplex;
+    function ArcTanh: TEComplex;
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -362,7 +358,7 @@ var
   LStrArray: TArray<string>;
   L: Integer;
 begin
-  LStrArray := ACmplStr.Split([ReImDelimiter]);
+  LStrArray := ACmplStr.Trim(['(', ')']).Split([ReImDelimiter]);
   L := Length(LStrArray);
   if L > 0 then
     Re := StrToFloatSafe(LStrArray[0])
@@ -439,12 +435,12 @@ begin
 end;
 
 function TDComplex.Inverse: TDComplex;
-{ inverse : r := 1 / z }
+
 var
   denom: Double;
 begin
   denom := System.Sqr(Re) + System.Sqr(Im);
-  { generates A fpu exception if denom=0 as for reals }
+
   Result.Re := Re / denom;
   Result.Im := -Im / denom;
 end;
@@ -538,7 +534,7 @@ end;
 
 function TDComplex.SqrAbs: Double;
 begin
-  Result := System.Sqr(Re) - System.Sqr(Im);
+  Result := System.Sqr(Re) + System.Sqr(Im);
 end;
 
 function TDComplex.Sqrt: TDComplex;
@@ -596,8 +592,7 @@ begin
 end;
 
 function TDComplex.Tanh: TDComplex;
-{ th(x) = sinh(x) / cosh(x) }
-{ cosh(x) > 1 qq x }
+
 begin
   Result := Self.Cosh / Self.Sinh;
 end;
@@ -624,34 +619,34 @@ begin
 end;
 
 class operator TDComplex.Divide(const A: Double; const B: TDComplex): TDComplex;
-{ division : z := r / zden }
+
 var
   denom: Double;
 begin
   with B do
     denom := System.Sqr(Re) + System.Sqr(Im);
-  { generates A fpu exception if denom=0 as for reals }
+
   Result.Re := (A * B.Re) / denom;
   Result.Im := -(A * B.Im) / denom;
 end;
 
-procedure TDComplex.Inc; // Inc
+procedure TDComplex.Inc;
 begin
   Self.Re := Self.Re + 1;
 end;
 
-procedure TDComplex.Dec; // Dec
+procedure TDComplex.Dec;
 begin
   Self.Re := Self.Re - 1;
 end;
 
-function TDComplex.Trunc: TDComplex; // Trunc
+function TDComplex.Trunc: TDComplex;
 begin
   Result.Re := System.Trunc(Re);
   Result.Im := System.Trunc(Im);
 end;
 
-function TDComplex.Round: TDComplex; // Round
+function TDComplex.Round: TDComplex;
 begin
   Result.Re := System.Round(Re);
   Result.Im := System.Round(Im);
@@ -679,7 +674,7 @@ begin
   Self.Re := ZeroValue;
 end;
 
-class operator TDComplex.GreaterThan(const A, B: TDComplex): Boolean; // GreaterThan
+class operator TDComplex.GreaterThan(const A, B: TDComplex): Boolean;
 begin
   Result := A.Re > B.Re;
 end;
@@ -694,13 +689,13 @@ begin
   Result := TDComplex.Create(-Self.Im, Self.Re);
 end;
 
-class operator TDComplex.LessThan(const A, B: TDComplex): Boolean; // LessThan
+class operator TDComplex.LessThan(const A, B: TDComplex): Boolean;
 begin
   Result := A.Re < B.Re;
 end;
 
 class operator TDComplex.LessThanOrEqual(const A, B: TDComplex): Boolean;
-// LessThanOrEqual
+
 begin
   Result := A.Re <= B.Re;
 end;
@@ -749,7 +744,6 @@ begin
   Result := Self.Re.IsPositiveInfinity or Self.Im.IsPositiveInfinity;
 end;
 
-// TSComplex
 function TSComplex.Magnitude: Single;
 begin
   Result := Hypot(Re, Im);
@@ -834,7 +828,7 @@ var
   LStrArray: TArray<string>;
   L: Integer;
 begin
-  LStrArray := ACmplStr.Split([ReImDelimiter]);
+  LStrArray := ACmplStr.Trim(['(', ')']).Split([ReImDelimiter]);
   L := Length(LStrArray);
   if L > 0 then
     Re := StrToFloatSafe(LStrArray[0])
@@ -905,12 +899,12 @@ begin
 end;
 
 function TSComplex.Inverse: TSComplex;
-{ inverse : r := 1 / z }
+
 var
   denom: Single;
 begin
   denom := System.Sqr(Re) + System.Sqr(Im);
-  { generates A fpu exception if denom=0 as for reals }
+
   Result.Re := Re / denom;
   Result.Im := -Im / denom;
 end;
@@ -1004,7 +998,7 @@ end;
 
 function TSComplex.SqrAbs: Single;
 begin
-  Result := System.Sqr(Re) - System.Sqr(Im);
+  Result := System.Sqr(Re) + System.Sqr(Im);
 end;
 
 function TSComplex.Sqrt: TSComplex;
@@ -1062,8 +1056,7 @@ begin
 end;
 
 function TSComplex.Tanh: TSComplex;
-{ th(x) = sinh(x) / cosh(x) }
-{ cosh(x) > 1 qq x }
+
 begin
   Result := Self.Cosh / Self.Sinh;
 end;
@@ -1090,34 +1083,34 @@ begin
 end;
 
 class operator TSComplex.Divide(const A: Single; const B: TSComplex): TSComplex;
-{ division : z := r / zden }
+
 var
   denom: Single;
 begin
   with B do
     denom := System.Sqr(Re) + System.Sqr(Im);
-  { generates A fpu exception if denom=0 as for reals }
+
   Result.Re := (A * B.Re) / denom;
   Result.Im := -(A * B.Im) / denom;
 end;
 
-procedure TSComplex.Inc; // Inc
+procedure TSComplex.Inc;
 begin
   Self.Re := Self.Re + 1;
 end;
 
-procedure TSComplex.Dec; // Dec
+procedure TSComplex.Dec;
 begin
   Self.Re := Self.Re - 1;
 end;
 
-function TSComplex.Trunc: TSComplex; // Trunc
+function TSComplex.Trunc: TSComplex;
 begin
   Result.Re := System.Trunc(Re);
   Result.Im := System.Trunc(Im);
 end;
 
-function TSComplex.Round: TSComplex; // Round
+function TSComplex.Round: TSComplex;
 begin
   Result.Re := System.Round(Re);
   Result.Im := System.Round(Im);
@@ -1145,7 +1138,7 @@ begin
   Self.Re := ZeroValue;
 end;
 
-class operator TSComplex.GreaterThan(const A, B: TSComplex): Boolean; // GreaterThan
+class operator TSComplex.GreaterThan(const A, B: TSComplex): Boolean;
 begin
   Result := A.Re > B.Re;
 end;
@@ -1160,13 +1153,13 @@ begin
   Result := TSComplex.Create(-Self.Im, Self.Re);
 end;
 
-class operator TSComplex.LessThan(const A, B: TSComplex): Boolean; // LessThan
+class operator TSComplex.LessThan(const A, B: TSComplex): Boolean;
 begin
   Result := A.Re < B.Re;
 end;
 
 class operator TSComplex.LessThanOrEqual(const A, B: TSComplex): Boolean;
-// LessThanOrEqual
+
 begin
   Result := A.Re <= B.Re;
 end;
@@ -1215,7 +1208,6 @@ begin
   Result := Self.Re.IsPositiveInfinity or Self.Im.IsPositiveInfinity;
 end;
 
-// TEComplex
 function TEComplex.Magnitude: Extended;
 begin
   Result := Hypot(Re, Im);
@@ -1300,7 +1292,7 @@ var
   LStrArray: TArray<string>;
   L: Integer;
 begin
-  LStrArray := ACmplStr.Split([ReImDelimiter]);
+  LStrArray := ACmplStr.Trim(['(', ')']).Split([ReImDelimiter]);
   L := Length(LStrArray);
   if L > 0 then
     Re := StrToFloatSafe(LStrArray[0])
@@ -1371,12 +1363,12 @@ begin
 end;
 
 function TEComplex.Inverse: TEComplex;
-{ inverse : r := 1 / z }
+
 var
   denom: Extended;
 begin
   denom := System.Sqr(Re) + System.Sqr(Im);
-  { generates A fpu exception if denom=0 as for reals }
+
   Result.Re := Re / denom;
   Result.Im := -Im / denom;
 end;
@@ -1470,7 +1462,7 @@ end;
 
 function TEComplex.SqrAbs: Extended;
 begin
-  Result := System.Sqr(Re) - System.Sqr(Im);
+  Result := System.Sqr(Re) + System.Sqr(Im);
 end;
 
 function TEComplex.Sqrt: TEComplex;
@@ -1528,8 +1520,7 @@ begin
 end;
 
 function TEComplex.Tanh: TEComplex;
-{ th(x) = sinh(x) / cosh(x) }
-{ cosh(x) > 1 qq x }
+
 begin
   Result := Self.Cosh / Self.Sinh;
 end;
@@ -1556,34 +1547,34 @@ begin
 end;
 
 class operator TEComplex.Divide(const A: Extended; const B: TEComplex): TEComplex;
-{ division : z := r / zden }
+
 var
   denom: Extended;
 begin
   with B do
     denom := System.Sqr(Re) + System.Sqr(Im);
-  { generates A fpu exception if denom=0 as for reals }
+
   Result.Re := (A * B.Re) / denom;
   Result.Im := -(A * B.Im) / denom;
 end;
 
-procedure TEComplex.Inc; // Inc
+procedure TEComplex.Inc;
 begin
   Self.Re := Self.Re + 1;
 end;
 
-procedure TEComplex.Dec; // Dec
+procedure TEComplex.Dec;
 begin
   Self.Re := Self.Re - 1;
 end;
 
-function TEComplex.Trunc: TEComplex; // Trunc
+function TEComplex.Trunc: TEComplex;
 begin
   Result.Re := System.Trunc(Re);
   Result.Im := System.Trunc(Im);
 end;
 
-function TEComplex.Round: TEComplex; // Round
+function TEComplex.Round: TEComplex;
 begin
   Result.Re := System.Round(Re);
   Result.Im := System.Round(Im);
@@ -1611,7 +1602,7 @@ begin
   Self.Re := ZeroValue;
 end;
 
-class operator TEComplex.GreaterThan(const A, B: TEComplex): Boolean; // GreaterThan
+class operator TEComplex.GreaterThan(const A, B: TEComplex): Boolean;
 begin
   Result := A.Re > B.Re;
 end;
@@ -1626,13 +1617,13 @@ begin
   Result := TEComplex.Create(-Self.Im, Self.Re);
 end;
 
-class operator TEComplex.LessThan(const A, B: TEComplex): Boolean; // LessThan
+class operator TEComplex.LessThan(const A, B: TEComplex): Boolean;
 begin
   Result := A.Re < B.Re;
 end;
 
 class operator TEComplex.LessThanOrEqual(const A, B: TEComplex): Boolean;
-// LessThanOrEqual
+
 begin
   Result := A.Re <= B.Re;
 end;
@@ -1682,4 +1673,5 @@ begin
 end;
 
 end.
+
 

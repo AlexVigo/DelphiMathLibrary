@@ -49,41 +49,41 @@ type
     constructor Random(const ARowCount, AColCount: Integer); overload;
     procedure Assign(const ASource: TDoubleDynMatrix);
     procedure AssignTo(const ADest: TDoubleDynMatrix);
-    procedure Zero; // Заполняет матрицу "0"
-    procedure Fill(const AValue: Double); // Заполняет матрицу значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Double);
     procedure Resize(const ARowCount, AColCount: Integer; const ASaveData: Boolean = true);
     function MaxItem(var ARowIndex, AColIndex: Integer): Double;
     function MinItem(var ARowIndex, AColIndex: Integer): Double;
     function ForEach(const AProc: TEleventProc<Double>): TDoubleDynMatrix;
     procedure Apply(const AProc: TEleventProc<Double>);
-    procedure Normalize; // Нормирует матрицу: Vi = Vi/MaxValue
-    procedure Transpose; // Транспонирование
-    procedure Exchange; // Перестановка (относительно альтернативной диагонали)
-    procedure Inverse; // Обращение
-    function Normalized: TDoubleDynMatrix; // Возвращает нормированную матрицу
-    function Transposed: TDoubleDynMatrix; // Транспонирование
-    function Exchanged: TDoubleDynMatrix; // Возвращает переставленную матрицу
-    function Inversed: TDoubleDynMatrix; // Обращение
+    procedure Normalize;
+    procedure Transpose;
+    procedure Exchange;
+    procedure Inverse;
+    function Normalized: TDoubleDynMatrix;
+    function Transposed: TDoubleDynMatrix;
+    function Exchanged: TDoubleDynMatrix;
+    function Inversed: TDoubleDynMatrix;
     function ToString: string; overload;
     function _ToString(const AMatrixSeparator, AVectorSeparator: string): string;
     function ToString(const AFormatSettings: TFormatSettings): string; overload;
     function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string; overload;
     function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string; overload;
-    property RowCount: Integer read GetRowCount; // Количество строк
-    property ColCount: Integer read GetColCount; // Количество столбцов
-    property IsSquare: Boolean read GetIsSquare; // Квадратная ?
+    property RowCount: Integer read GetRowCount;
+    property ColCount: Integer read GetColCount;
+    property IsSquare: Boolean read GetIsSquare;
     property IsSymmetric: Boolean read GetIsSymmetric;
     property IsDiagonal: Boolean read GetIsDiagonal;
     property IsIdentity: Boolean read GetIsIdentity;
     property IsZero: Boolean read GetIsZero;
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: Double read GetNorm; // Норма вектора
-    property Sum: Double read GetSum; // Сумма элементов
-    property Mean: Double read GetMean; // Сумма элементов
-    property Variance: Double read GetVariance; // Дисперсия
-    property Deviation: Double read GetDeviation; // СКО
-    property MaxValue: Double read GetMaxValue; // Максимальное значение
-    property MinValue: Double read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: Double read GetNorm;
+    property Sum: Double read GetSum;
+    property Mean: Double read GetMean;
+    property Variance: Double read GetVariance;
+    property Deviation: Double read GetDeviation;
+    property MaxValue: Double read GetMaxValue;
+    property MinValue: Double read GetMinValue;
     property Trace: Double read GetTrace;
     property Determinant: Double read GetDeterminant;
     property Row[const AIndex: Integer]: TDoubleDynArray read GetRow write SetRow;
@@ -170,41 +170,41 @@ type
     constructor Random(const ARowCount, AColCount: Integer); overload;
     procedure Assign(const ASource: TSingleDynMatrix);
     procedure AssignTo(const ADest: TSingleDynMatrix);
-    procedure Zero; // Заполняет матрицу "0"
-    procedure Fill(const AValue: Single); // Заполняет матрицу значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Single);
     procedure Resize(const ARowCount, AColCount: Integer; const ASaveData: Boolean = true);
     function MaxItem(var ARowIndex, AColIndex: Integer): Single;
     function MinItem(var ARowIndex, AColIndex: Integer): Single;
     function ForEach(const AProc: TEleventProc<Single>): TSingleDynMatrix;
     procedure Apply(const AProc: TEleventProc<Single>);
-    procedure Normalize; // Нормирует матрицу: Vi = Vi/MaxValue
-    procedure Transpose; // Транспонирование
-    procedure Exchange; // Перестановка (относительно альтернативной диагонали)
-    procedure Inverse; // Обращение
-    function Normalized: TSingleDynMatrix; // Возвращает нормированную матрицу
-    function Transposed: TSingleDynMatrix; // Транспонирование
-    function Exchanged: TSingleDynMatrix; // Возвращает переставленную матрицу
-    function Inversed: TSingleDynMatrix; // Обращение
+    procedure Normalize;
+    procedure Transpose;
+    procedure Exchange;
+    procedure Inverse;
+    function Normalized: TSingleDynMatrix;
+    function Transposed: TSingleDynMatrix;
+    function Exchanged: TSingleDynMatrix;
+    function Inversed: TSingleDynMatrix;
     function ToString: string; overload;
     function _ToString(const AMatrixSeparator, AVectorSeparator: string): string;
     function ToString(const AFormatSettings: TFormatSettings): string; overload;
     function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string; overload;
     function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string; overload;
-    property RowCount: Integer read GetRowCount; // Количество строк
-    property ColCount: Integer read GetColCount; // Количество столбцов
-    property IsSquare: Boolean read GetIsSquare; // Квадратная ?
+    property RowCount: Integer read GetRowCount;
+    property ColCount: Integer read GetColCount;
+    property IsSquare: Boolean read GetIsSquare;
     property IsSymmetric: Boolean read GetIsSymmetric;
     property IsDiagonal: Boolean read GetIsDiagonal;
     property IsIdentity: Boolean read GetIsIdentity;
     property IsZero: Boolean read GetIsZero;
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: Single read GetNorm; // Норма вектора
-    property Sum: Single read GetSum; // Сумма элементов
-    property Mean: Single read GetMean; // Сумма элементов
-    property Variance: Single read GetVariance; // Дисперсия
-    property Deviation: Single read GetDeviation; // СКО
-    property MaxValue: Single read GetMaxValue; // Максимальное значение
-    property MinValue: Single read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: Single read GetNorm;
+    property Sum: Single read GetSum;
+    property Mean: Single read GetMean;
+    property Variance: Single read GetVariance;
+    property Deviation: Single read GetDeviation;
+    property MaxValue: Single read GetMaxValue;
+    property MinValue: Single read GetMinValue;
     property Trace: Single read GetTrace;
     property Determinant: Single read GetDeterminant;
     property Row[const AIndex: Integer]: TSingleDynArray read GetRow write SetRow;
@@ -291,41 +291,41 @@ type
     constructor Random(const ARowCount, AColCount: Integer); overload;
     procedure Assign(const ASource: TExtendedDynMatrix);
     procedure AssignTo(const ADest: TExtendedDynMatrix);
-    procedure Zero; // Заполняет матрицу "0"
-    procedure Fill(const AValue: Extended); // Заполняет матрицу значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Extended);
     procedure Resize(const ARowCount, AColCount: Integer; const ASaveData: Boolean = true);
     function MaxItem(var ARowIndex, AColIndex: Integer): Extended;
     function MinItem(var ARowIndex, AColIndex: Integer): Extended;
     function ForEach(const AProc: TEleventProc<Extended>): TExtendedDynMatrix;
     procedure Apply(const AProc: TEleventProc<Extended>);
-    procedure Normalize; // Нормирует матрицу: Vi = Vi/MaxValue
-    procedure Transpose; // Транспонирование
-    procedure Exchange; // Перестановка (относительно альтернативной диагонали)
-    procedure Inverse; // Обращение
-    function Normalized: TExtendedDynMatrix; // Возвращает нормированную матрицу
-    function Transposed: TExtendedDynMatrix; // Транспонирование
-    function Exchanged: TExtendedDynMatrix; // Возвращает переставленную матрицу
-    function Inversed: TExtendedDynMatrix; // Обращение
+    procedure Normalize;
+    procedure Transpose;
+    procedure Exchange;
+    procedure Inverse;
+    function Normalized: TExtendedDynMatrix;
+    function Transposed: TExtendedDynMatrix;
+    function Exchanged: TExtendedDynMatrix;
+    function Inversed: TExtendedDynMatrix;
     function ToString: string; overload;
     function _ToString(const AMatrixSeparator, AVectorSeparator: string): string;
     function ToString(const AFormatSettings: TFormatSettings): string; overload;
     function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string; overload;
     function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string; overload;
-    property RowCount: Integer read GetRowCount; // Количество строк
-    property ColCount: Integer read GetColCount; // Количество столбцов
-    property IsSquare: Boolean read GetIsSquare; // Квадратная ?
+    property RowCount: Integer read GetRowCount;
+    property ColCount: Integer read GetColCount;
+    property IsSquare: Boolean read GetIsSquare;
     property IsSymmetric: Boolean read GetIsSymmetric;
     property IsDiagonal: Boolean read GetIsDiagonal;
     property IsIdentity: Boolean read GetIsIdentity;
     property IsZero: Boolean read GetIsZero;
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: Extended read GetNorm; // Норма вектора
-    property Sum: Extended read GetSum; // Сумма элементов
-    property Mean: Extended read GetMean; // Сумма элементов
-    property Variance: Extended read GetVariance; // Дисперсия
-    property Deviation: Extended read GetDeviation; // СКО
-    property MaxValue: Extended read GetMaxValue; // Максимальное значение
-    property MinValue: Extended read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: Extended read GetNorm;
+    property Sum: Extended read GetSum;
+    property Mean: Extended read GetMean;
+    property Variance: Extended read GetVariance;
+    property Deviation: Extended read GetDeviation;
+    property MaxValue: Extended read GetMaxValue;
+    property MinValue: Extended read GetMinValue;
     property Trace: Extended read GetTrace;
     property Determinant: Extended read GetDeterminant;
     property Row[const AIndex: Integer]: TExtendedDynArray read GetRow write SetRow;
@@ -402,30 +402,30 @@ type
     constructor Eye(const ADimension: Integer); overload;
     procedure Assign(const ASource: TIntegerDynMatrix);
     procedure AssignTo(const ADest: TIntegerDynMatrix);
-    procedure Zero; // Заполняет матрицу "0"
-    procedure Fill(const AValue: Integer); // Заполняет матрицу значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Integer);
     procedure Resize(const ARowCount, AColCount: Integer; const ASaveData: Boolean = true);
     function MaxItem(var ARowIndex, AColIndex: Integer): Integer;
     function MinItem(var ARowIndex, AColIndex: Integer): Integer;
     function ForEach(const AProc: TEleventProc<Integer>): TIntegerDynMatrix;
     procedure Apply(const AProc: TEleventProc<Integer>);
-    procedure Transpose; // Транспонирование
-    procedure Exchange; // Перестановка (относительно альтернативной диагонали)
-    function Transposed: TIntegerDynMatrix; // Транспонирование
-    function Exchanged: TIntegerDynMatrix; // Возвращает переставленную матрицу
+    procedure Transpose;
+    procedure Exchange;
+    function Transposed: TIntegerDynMatrix;
+    function Exchanged: TIntegerDynMatrix;
     function ToString: string;
     function _ToString(const AMatrixSeparator, AVectorSeparator: string): string;
-    property RowCount: Integer read GetRowCount; // Количество строк
-    property ColCount: Integer read GetColCount; // Количество столбцов
-    property IsSquare: Boolean read GetIsSquare; // Квадратная ?
+    property RowCount: Integer read GetRowCount;
+    property ColCount: Integer read GetColCount;
+    property IsSquare: Boolean read GetIsSquare;
     property IsSymmetric: Boolean read GetIsSymmetric;
     property IsDiagonal: Boolean read GetIsDiagonal;
     property IsIdentity: Boolean read GetIsIdentity;
     property IsZero: Boolean read GetIsZero;
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Sum: Integer read GetSum; // Сумма элементов
-    property MaxValue: Integer read GetMaxValue; // Максимальное значение
-    property MinValue: Integer read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Sum: Integer read GetSum;
+    property MaxValue: Integer read GetMaxValue;
+    property MinValue: Integer read GetMinValue;
     property Row[const AIndex: Integer]: TIntegerDynArray read GetRow write SetRow;
     property Col[const AIndex: Integer]: TIntegerDynArray read GetCol write SetCol;
     property Item[const ARow, ACol: Integer]: Integer read GetItem write SetItem;
@@ -766,11 +766,6 @@ begin
     Self[I, AIndex] := AValue[I];
 end;
 
-// function TDoubleDynMatrixHelper.Sort(var Indexes: TIntegerDynArray): TDoubleDynMatrix;
-// begin
-//
-// end;
-
 procedure TDoubleDynMatrixHelper.Sort;
 var
   I, J, K: Integer;
@@ -788,11 +783,6 @@ begin
     end;
   end;
 end;
-
-// function TDoubleDynMatrixHelper.SortWithOrder(const OrderIndexes: array of Integer): TDoubleDynMatrix;
-// begin
-//
-// end;
 
 procedure TDoubleDynMatrixHelper.Subtract(const AMatrix: TDoubleDynMatrix);
 var
@@ -908,25 +898,6 @@ begin
     Self[I] := TDoubleDynArray.Create(AMatrix[I]);
   end;
 end;
-
-
-// function TDoubleDynMatrixHelper.DeleteValues(
-// const AStates: TBooleanDynMatrix): TDoubleDynMatrix;
-// var
-// I: Integer;
-// begin
-// NeedSameLength(Self.RowCount, System.Length(AStates));
-// System.SetLength(Result, Self.RowCount);
-// for I := Self.LowRow to Self.HighRow do
-// begin
-// Result[I] := Self[I].DeleteValues(AStates[I]);
-// end;
-// end;
-
-// function TDoubleDynMatrixHelper.DeleteIndexes(const Indexes: TIntegerDynArray): TDoubleDynMatrix;
-// begin
-//
-// end;
 
 constructor TDoubleDynMatrixHelper.Diag(const AVector: TDoubleDynArray);
 var
@@ -1055,11 +1026,6 @@ begin
     end;
   end;
 end;
-
-// function TDoubleDynMatrixHelper.GetMaxIndex: integer;
-// begin
-//
-// end;
 
 function TDoubleDynMatrixHelper.GetMaxValue: Double;
 var
@@ -1191,7 +1157,7 @@ var
 begin
   MustBeSquare;
   LMatrix := TDoubleDynMatrix.Create(Self);
-  // Метод Грина
+
   N := RowCount - 1;
   if N < 0 then
   begin
@@ -1521,7 +1487,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TDoubleDynMatrixHelper.ToString: string;
@@ -1532,7 +1498,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString;
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TDoubleDynMatrixHelper._ToString(const AMatrixSeparator, AVectorSeparator: string): string;
@@ -1543,7 +1509,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I]._ToString(AVectorSeparator);
-  Result := string.Join(AMatrixSeparator, S);
+  Result := '{' + string.Join(AMatrixSeparator, S) + '}';
 end;
 
 function TDoubleDynMatrixHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
@@ -1554,7 +1520,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TDoubleDynMatrixHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
@@ -1565,7 +1531,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 class function TDoubleDynMatrixHelper.Parse(const AMatrixStr: string): TDoubleDynMatrix;
@@ -1600,10 +1566,6 @@ begin
   for I := Self.LowRow to Self.HighRow do
     Result := Result * Self[I].Prod;
 end;
-
-///
-/// Single
-///
 
 constructor TSingleDynMatrixHelper.Create(const ARowCount, AColCount: Integer);
 begin
@@ -1910,11 +1872,6 @@ begin
     Self[I, AIndex] := AValue[I];
 end;
 
-// function TSingleDynMatrixHelper.Sort(var Indexes: TIntegerDynArray): TSingleDynMatrix;
-// begin
-//
-// end;
-
 procedure TSingleDynMatrixHelper.Sort;
 var
   I, J, K: Integer;
@@ -1932,11 +1889,6 @@ begin
     end;
   end;
 end;
-
-// function TSingleDynMatrixHelper.SortWithOrder(const OrderIndexes: array of Integer): TSingleDynMatrix;
-// begin
-//
-// end;
 
 procedure TSingleDynMatrixHelper.Subtract(const AMatrix: TSingleDynMatrix);
 var
@@ -2052,25 +2004,6 @@ begin
     Self[I] := TSingleDynArray.Create(AMatrix[I]);
   end;
 end;
-
-
-// function TSingleDynMatrixHelper.DeleteValues(
-// const AStates: TBooleanDynMatrix): TSingleDynMatrix;
-// var
-// I: Integer;
-// begin
-// NeedSameLength(Self.RowCount, System.Length(AStates));
-// System.SetLength(Result, Self.RowCount);
-// for I := Self.LowRow to Self.HighRow do
-// begin
-// Result[I] := Self[I].DeleteValues(AStates[I]);
-// end;
-// end;
-
-// function TSingleDynMatrixHelper.DeleteIndexes(const Indexes: TIntegerDynArray): TSingleDynMatrix;
-// begin
-//
-// end;
 
 constructor TSingleDynMatrixHelper.Diag(const AVector: TSingleDynArray);
 var
@@ -2199,11 +2132,6 @@ begin
     end;
   end;
 end;
-
-// function TSingleDynMatrixHelper.GetMaxIndex: integer;
-// begin
-//
-// end;
 
 function TSingleDynMatrixHelper.GetMaxValue: Single;
 var
@@ -2335,7 +2263,7 @@ var
 begin
   MustBeSquare;
   LMatrix := TSingleDynMatrix.Create(Self);
-  // Метод Грина
+
   N := RowCount - 1;
   if N < 0 then
   begin
@@ -2665,7 +2593,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TSingleDynMatrixHelper.ToString: string;
@@ -2676,7 +2604,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString;
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TSingleDynMatrixHelper._ToString(const AMatrixSeparator, AVectorSeparator: string): string;
@@ -2687,7 +2615,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I]._ToString(AVectorSeparator);
-  Result := string.Join(AMatrixSeparator, S);
+  Result := '{' + string.Join(AMatrixSeparator, S) + '}';
 end;
 
 function TSingleDynMatrixHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
@@ -2698,7 +2626,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TSingleDynMatrixHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
@@ -2709,7 +2637,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 class function TSingleDynMatrixHelper.Parse(const AMatrixStr: string): TSingleDynMatrix;
@@ -2744,10 +2672,6 @@ begin
   for I := Self.LowRow to Self.HighRow do
     Result := Result * Self[I].Prod;
 end;
-
-///
-/// Extended
-///
 
 constructor TExtendedDynMatrixHelper.Create(const ARowCount, AColCount: Integer);
 begin
@@ -3054,11 +2978,6 @@ begin
     Self[I, AIndex] := AValue[I];
 end;
 
-// function TExtendedDynMatrixHelper.Sort(var Indexes: TIntegerDynArray): TExtendedDynMatrix;
-// begin
-//
-// end;
-
 procedure TExtendedDynMatrixHelper.Sort;
 var
   I, J, K: Integer;
@@ -3076,11 +2995,6 @@ begin
     end;
   end;
 end;
-
-// function TExtendedDynMatrixHelper.SortWithOrder(const OrderIndexes: array of Integer): TExtendedDynMatrix;
-// begin
-//
-// end;
 
 procedure TExtendedDynMatrixHelper.Subtract(const AMatrix: TExtendedDynMatrix);
 var
@@ -3196,25 +3110,6 @@ begin
     Self[I] := TExtendedDynArray.Create(AMatrix[I]);
   end;
 end;
-
-
-// function TExtendedDynMatrixHelper.DeleteValues(
-// const AStates: TBooleanDynMatrix): TExtendedDynMatrix;
-// var
-// I: Integer;
-// begin
-// NeedSameLength(Self.RowCount, System.Length(AStates));
-// System.SetLength(Result, Self.RowCount);
-// for I := Self.LowRow to Self.HighRow do
-// begin
-// Result[I] := Self[I].DeleteValues(AStates[I]);
-// end;
-// end;
-
-// function TExtendedDynMatrixHelper.DeleteIndexes(const Indexes: TIntegerDynArray): TExtendedDynMatrix;
-// begin
-//
-// end;
 
 constructor TExtendedDynMatrixHelper.Diag(const AVector: TExtendedDynArray);
 var
@@ -3343,11 +3238,6 @@ begin
     end;
   end;
 end;
-
-// function TExtendedDynMatrixHelper.GetMaxIndex: integer;
-// begin
-//
-// end;
 
 function TExtendedDynMatrixHelper.GetMaxValue: Extended;
 var
@@ -3479,7 +3369,7 @@ var
 begin
   MustBeSquare;
   LMatrix := TExtendedDynMatrix.Create(Self);
-  // Метод Грина
+
   N := RowCount - 1;
   if N < 0 then
   begin
@@ -3809,7 +3699,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TExtendedDynMatrixHelper.ToString: string;
@@ -3820,7 +3710,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString;
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TExtendedDynMatrixHelper._ToString(const AMatrixSeparator, AVectorSeparator: string): string;
@@ -3831,7 +3721,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I]._ToString(AVectorSeparator);
-  Result := string.Join(AMatrixSeparator, S);
+  Result := '{' + string.Join(AMatrixSeparator, S) + '}';
 end;
 
 function TExtendedDynMatrixHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
@@ -3842,7 +3732,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TExtendedDynMatrixHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
@@ -3853,7 +3743,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 class function TExtendedDynMatrixHelper.Parse(const AMatrixStr: string): TExtendedDynMatrix;
@@ -3888,10 +3778,6 @@ begin
   for I := Self.LowRow to Self.HighRow do
     Result := Result * Self[I].Prod;
 end;
-
-///
-/// Integer
-///
 
 constructor TIntegerDynMatrixHelper.Create(const ARowCount, AColCount: Integer);
 begin
@@ -4162,11 +4048,6 @@ begin
     Self[I, AIndex] := AValue[I];
 end;
 
-// function TIntegerDynMatrixHelper.Sort(var Indexes: TIntegerDynArray): TIntegerDynMatrix;
-// begin
-//
-// end;
-
 procedure TIntegerDynMatrixHelper.Sort;
 var
   I, J, K: Integer;
@@ -4184,11 +4065,6 @@ begin
     end;
   end;
 end;
-
-// function TIntegerDynMatrixHelper.SortWithOrder(const OrderIndexes: array of Integer): TIntegerDynMatrix;
-// begin
-//
-// end;
 
 procedure TIntegerDynMatrixHelper.Subtract(const AMatrix: TIntegerDynMatrix);
 var
@@ -4280,25 +4156,6 @@ begin
     Self[I] := TIntegerDynArray.Create(AMatrix[I]);
   end;
 end;
-
-
-// function TIntegerDynMatrixHelper.DeleteValues(
-// const AStates: TBooleanDynMatrix): TIntegerDynMatrix;
-// var
-// I: Integer;
-// begin
-// NeedSameLength(Self.RowCount, System.Length(AStates));
-// System.SetLength(Result, Self.RowCount);
-// for I := Self.LowRow to Self.HighRow do
-// begin
-// Result[I] := Self[I].DeleteValues(AStates[I]);
-// end;
-// end;
-
-// function TIntegerDynMatrixHelper.DeleteIndexes(const Indexes: TIntegerDynArray): TIntegerDynMatrix;
-// begin
-//
-// end;
 
 constructor TIntegerDynMatrixHelper.Diag(const AVector: TIntegerDynArray);
 var
@@ -4427,11 +4284,6 @@ begin
     end;
   end;
 end;
-
-// function TIntegerDynMatrixHelper.GetMaxIndex: integer;
-// begin
-//
-// end;
 
 function TIntegerDynMatrixHelper.GetMaxValue: Integer;
 var
@@ -4632,7 +4484,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I].ToString;
-  Result := string.Join(MatrixVectorDelimiter, S);
+  Result := '{' + string.Join(MatrixVectorDelimiter, S) + '}';
 end;
 
 function TIntegerDynMatrixHelper._ToString(const AMatrixSeparator, AVectorSeparator: string): string;
@@ -4643,7 +4495,7 @@ begin
   System.SetLength(S, Self.RowCount);
   for I := low(S) to High(S) do
     S[I] := Self[I]._ToString(AVectorSeparator);
-  Result := string.Join(AMatrixSeparator, S);
+  Result := '{' + string.Join(AMatrixSeparator, S) + '}';
 end;
 
 class function TIntegerDynMatrixHelper.Parse(const AMatrixStr: string): TIntegerDynMatrix;

@@ -13,7 +13,6 @@ type
   EComplexMatrixError = class(EMatrixError);
   TEleventProc<T> = procedure(var Value: T);
 
-  // Vector
   TIntegerDynArray = System.Types.TIntegerDynArray;
   TCardinalDynArray = System.Types.TCardinalDynArray;
   TWordDynArray = System.Types.TWordDynArray;
@@ -24,7 +23,7 @@ type
   TLongWordDynArray = System.Types.TLongWordDynArray;
   TSingleDynArray = System.Types.TSingleDynArray;
   TDoubleDynArray = System.Types.TDoubleDynArray;
-  TExtendedDynArray = array of Extended;
+  TExtendedDynArray = TArray<Extended>;
   TBooleanDynArray = System.Types.TBooleanDynArray;
   TStringDynArray = System.Types.TStringDynArray;
   TWideStringDynArray = System.Types.TWideStringDynArray;
@@ -32,7 +31,7 @@ type
   PSingleDynArray = TArray<PSingle>;
   PExtendedDynArray = TArray<PExtended>;
   PIntegerDynArray = TArray<PInteger>;
-  // Complex vector
+
   TDComplexDynArray = TArray<TDComplex>;
   PDComplexDynArray = TArray<PDComplex>;
   TSComplexDynArray = TArray<TSComplex>;
@@ -40,7 +39,6 @@ type
   TEComplexDynArray = TArray<TEComplex>;
   PEComplexDynArray = TArray<PEComplex>;
 
-  // Matrix
   TIntegerDynMatrix = TArray<TIntegerDynArray>;
   TCardinalDynMatrix = TArray<TCardinalDynArray>;
   TWordDynMatrix = TArray<TWordDynArray>;
@@ -55,7 +53,7 @@ type
   TBooleanDynMatrix = TArray<TBooleanDynArray>;
   TStringDynMatrix = TArray<TStringDynArray>;
   TWideStringDynMatrix = TArray<TWideStringDynArray>;
-  // Complex matrix
+
   TDComplexDynMatrix = TArray<TDComplexDynArray>;
   PDComplexDynMatrix = TArray<PDComplexDynArray>;
   TSComplexDynMatrix = TArray<TSComplexDynArray>;
@@ -69,9 +67,9 @@ type
 
   const
     VectorItemDelimiter = ' ';
-    MatrixVectorDelimiter = ';';
-    UnexpectedSymbolsInMatrixOrVectors: array of Char = //
-      ['(', ')', '[', ']', #10, #13];
+    MatrixVectorDelimiter = '; ';
+    UnexpectedSymbolsInMatrixOrVectors: array of Char =
+      ['(', ')', '[', ']', '{', '}', #10, #13];
 
 implementation
 
@@ -99,3 +97,4 @@ begin
 end;
 
 end.
+

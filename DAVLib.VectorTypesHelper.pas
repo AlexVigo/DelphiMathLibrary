@@ -33,48 +33,41 @@ type
     constructor Ones(const ALength: Integer);
     constructor Base(const ALength, ANumber: Integer);
     constructor Random(const ALength: Integer);
-    // создает вектор с координатами
     procedure Assign(const ASource: TDoubleDynArray);
     procedure AssignTo(const ADest: TDoubleDynArray);
     function Low: Integer;
     function High: Integer;
-    procedure Zero; // Заполняет вектор "0"
-    procedure Fill(const AValue: Double); // Заполняет вектор значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Double);
     procedure Multiply(const AValue: Double); overload;
     function Multiply(const AVector: TDoubleDynArray): TDoubleDynMatrix; overload;
     procedure Add(const AValue: Double = 1); overload;
     procedure Add(const AVector: TDoubleDynArray); overload;
     procedure Divide(const AValue: Double); overload;
-    // function Divide(const AVector: TDoubleDynArray): TDoubleDynMatrix; overload;
     procedure Subtract(const AValue: Double = 1); overload;
     procedure Subtract(const AVector: TDoubleDynArray); overload;
     function ForEach(const AProc: TEleventProc<Double>): TDoubleDynArray;
     procedure Apply(const AProc: TEleventProc<Double>);
-    procedure Normalize; // Нормирует вектор: Vi = Vi/MaxValue
-    function Normalized: TDoubleDynArray; // Возвращает нормированный вектор
-    procedure MakeUnitVector; // Делает вектор единичным
-    function AsUnitVector: TDoubleDynArray; // Возвращает единичный вектор
+    procedure Normalize;
+    function Normalized: TDoubleDynArray;
+    procedure MakeUnitVector;
+    function AsUnitVector: TDoubleDynArray;
     function First(): Double;
     function Last(): Double;
     procedure Resize(const ALength: Integer; const ASaveData: Boolean = true);
-    // Изменяет размерность вектора
     property Item[const AIndex: Integer]: Double read GetItem write SetItem;
     property PItem[const AIndex: Integer]: PDouble read GetPItem;
-    // координата вектора
     property Length: Integer read GetLength write SetLength;
-    // Размерность вектора
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: Double read GetNorm; // Норма вектора
-    property Sum: Double read GetSum; // Сумма элементов
-    property Mean: Double read GetMean; // Сумма элементов
-    property Variance: Double read GetVariance; // Дисперсия
-    property Deviation: Double read GetDeviation; // СКО
-    property MaxValue: Double read GetMaxValue; // Максимальное значение
-    property MinValue: Double read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: Double read GetNorm;
+    property Sum: Double read GetSum;
+    property Mean: Double read GetMean;
+    property Variance: Double read GetVariance;
+    property Deviation: Double read GetDeviation;
+    property MaxValue: Double read GetMaxValue;
+    property MinValue: Double read GetMinValue;
     property MaxIndex: Integer read GetMaxIndex;
-    // Индекс элнмента с максимальным значением
     property MinIndex: Integer read GetMinIndex;
-    // Индекс элнмента с минимальным  значением
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -83,14 +76,13 @@ type
     function IsInfinity: Boolean;
     function IsNegativeInfinity: Boolean;
     function IsPositiveInfinity: Boolean;
-    function Inverse: TDoubleDynArray; { inverse : r := 1 / z }
+    function Inverse: TDoubleDynArray;
     function Prod: Double;
     function ReverseArray: TDoubleDynArray;
     function DeleteIndexes(const AIndexes: TIntegerDynArray): TDoubleDynArray;
     procedure Sort; overload;
     procedure Sort(var AIndexes: TIntegerDynArray); overload;
     procedure SortWithOrder(const AOrderIndexes: TIntegerDynArray);
-    // если индекса не будет в массиве, то элемент будет удален
     function Negative: TDoubleDynArray;
     function Equal(const AVector: TDoubleDynArray): Boolean; overload;
     function NotEqual(const AVector: TDoubleDynArray): Boolean; overload;
@@ -137,48 +129,41 @@ type
     constructor Create(const AVectorStr: string); overload;
     constructor Base(const ALength, ANumber: Integer);
     constructor Random(const ALength: Integer);
-    // создает вектор с координатами
     procedure Assign(const ASource: TSingleDynArray);
     procedure AssignTo(const ADest: TSingleDynArray);
     function Low: Integer;
     function High: Integer;
-    procedure Zero; // Заполняет вектор "0"
-    procedure Fill(const AValue: Single); // Заполняет вектор значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Single);
     procedure Multiply(const AValue: Single); overload;
     function Multiply(const AVector: TSingleDynArray): TSingleDynMatrix; overload;
     procedure Add(const AValue: Single = 1); overload;
     procedure Add(const AVector: TSingleDynArray); overload;
     procedure Divide(const AValue: Single); overload;
-    // procedure Divide(const AVector: TSingleDynArray); overload;
     procedure Subtract(const AValue: Single = 1); overload;
     procedure Subtract(const AVector: TSingleDynArray); overload;
     function ForEach(const AProc: TEleventProc<Single>): TSingleDynArray;
     procedure Apply(const AProc: TEleventProc<Single>);
-    procedure Normalize; // Нормирует вектор: Vi = Vi/MaxValue
-    function Normalized: TSingleDynArray; // Возвращает нормированный вектор
-    procedure MakeUnitVector; // Делает вектор единичным
-    function AsUnitVector: TSingleDynArray; // Возвращает единичный вектор
+    procedure Normalize;
+    function Normalized: TSingleDynArray;
+    procedure MakeUnitVector;
+    function AsUnitVector: TSingleDynArray;
     function First(): Single;
     function Last(): Single;
     procedure Resize(const ALength: Integer; const ASaveData: Boolean = true);
-    // Изменяет размерность вектора
     property Item[const AIndex: Integer]: Single read GetItem write SetItem;
     property PItem[const AIndex: Integer]: PSingle read GetPItem;
-    // координата вектора
     property Length: Integer read GetLength write SetLength;
-    // Размерность вектора
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: Single read GetNorm; // Норма вектора
-    property Sum: Single read GetSum; // Сумма элементов
-    property Mean: Single read GetMean; // Сумма элементов
-    property Variance: Single read GetVariance; // Дисперсия
-    property Deviation: Single read GetDeviation; // СКО
-    property MaxValue: Single read GetMaxValue; // Максимальное значение
-    property MinValue: Single read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: Single read GetNorm;
+    property Sum: Single read GetSum;
+    property Mean: Single read GetMean;
+    property Variance: Single read GetVariance;
+    property Deviation: Single read GetDeviation;
+    property MaxValue: Single read GetMaxValue;
+    property MinValue: Single read GetMinValue;
     property MaxIndex: Integer read GetMaxIndex;
-    // Индекс элнмента с максимальным значением
     property MinIndex: Integer read GetMinIndex;
-    // Индекс элнмента с минимальным  значением
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -187,14 +172,13 @@ type
     function IsInfinity: Boolean;
     function IsNegativeInfinity: Boolean;
     function IsPositiveInfinity: Boolean;
-    function Inverse: TSingleDynArray; { inverse : r := 1 / z }
+    function Inverse: TSingleDynArray;
     function Prod: Single;
     function ReverseArray: TSingleDynArray;
     function DeleteIndexes(const AIndexes: TIntegerDynArray): TSingleDynArray;
     procedure Sort; overload;
     procedure Sort(var AIndexes: TIntegerDynArray); overload;
     procedure SortWithOrder(const AOrderIndexes: TIntegerDynArray);
-    // если индекса не будет в массиве, то элемент будет удален
     function Negative: TSingleDynArray;
     function Equal(const AVector: TSingleDynArray): Boolean; overload;
     function NotEqual(const AVector: TSingleDynArray): Boolean; overload;
@@ -241,48 +225,41 @@ type
     constructor Create(const AVectorStr: string); overload;
     constructor Base(const ALength, ANumber: Integer);
     constructor Random(const ALength: Integer);
-    // создает вектор с координатами
     procedure Assign(const ASource: TExtendedDynArray);
     procedure AssignTo(const ADest: TExtendedDynArray);
     function Low: Integer;
     function High: Integer;
-    procedure Zero; // Заполняет вектор "0"
-    procedure Fill(const AValue: Extended); // Заполняет вектор значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Extended);
     procedure Multiply(const AValue: Extended); overload;
     function Multiply(const AVector: TExtendedDynArray): TExtendedDynMatrix; overload;
     procedure Add(const AValue: Extended = 1); overload;
     procedure Add(const AVector: TExtendedDynArray); overload;
     procedure Divide(const AValue: Extended); overload;
-    // procedure Divide(const AVector: TExtendedDynArray); overload;
     procedure Subtract(const AValue: Extended = 1); overload;
     procedure Subtract(const AVector: TExtendedDynArray); overload;
     function ForEach(const AProc: TEleventProc<Extended>): TExtendedDynArray;
     procedure Apply(const AProc: TEleventProc<Extended>);
-    procedure Normalize; // Нормирует вектор: Vi = Vi/MaxValue
-    function Normalized: TExtendedDynArray; // Возвращает нормированный вектор
-    procedure MakeUnitVector; // Делает вектор единичным
-    function AsUnitVector: TExtendedDynArray; // Возвращает единичный вектор
+    procedure Normalize;
+    function Normalized: TExtendedDynArray;
+    procedure MakeUnitVector;
+    function AsUnitVector: TExtendedDynArray;
     function First(): Extended;
     function Last(): Extended;
     procedure Resize(const ALength: Integer; const ASaveData: Boolean = true);
-    // Изменяет размерность вектора
     property Item[const AIndex: Integer]: Extended read GetItem write SetItem;
     property PItem[const AIndex: Integer]: PExtended read GetPItem;
-    // координата вектора
     property Length: Integer read GetLength write SetLength;
-    // Размерность вектора
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: Extended read GetNorm; // Норма вектора
-    property Sum: Extended read GetSum; // Сумма элементов
-    property Mean: Extended read GetMean; // Сумма элементов
-    property Variance: Extended read GetVariance; // Дисперсия
-    property Deviation: Extended read GetDeviation; // СКО
-    property MaxValue: Extended read GetMaxValue; // Максимальное значение
-    property MinValue: Extended read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: Extended read GetNorm;
+    property Sum: Extended read GetSum;
+    property Mean: Extended read GetMean;
+    property Variance: Extended read GetVariance;
+    property Deviation: Extended read GetDeviation;
+    property MaxValue: Extended read GetMaxValue;
+    property MinValue: Extended read GetMinValue;
     property MaxIndex: Integer read GetMaxIndex;
-    // Индекс элнмента с максимальным значением
     property MinIndex: Integer read GetMinIndex;
-    // Индекс элнмента с минимальным  значением
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -291,14 +268,13 @@ type
     function IsInfinity: Boolean;
     function IsNegativeInfinity: Boolean;
     function IsPositiveInfinity: Boolean;
-    function Inverse: TExtendedDynArray; { inverse : r := 1 / z }
+    function Inverse: TExtendedDynArray;
     function Prod: Extended;
     function ReverseArray: TExtendedDynArray;
     function DeleteIndexes(const AIndexes: TIntegerDynArray): TExtendedDynArray;
     procedure Sort; overload;
     procedure Sort(var AIndexes: TIntegerDynArray); overload;
     procedure SortWithOrder(const AOrderIndexes: TIntegerDynArray);
-    // если индекса не будет в массиве, то элемент будет удален
     function Negative: TExtendedDynArray;
     function Equal(const AVector: TExtendedDynArray): Boolean; overload;
     function NotEqual(const AVector: TExtendedDynArray): Boolean; overload;
@@ -340,13 +316,12 @@ type
     constructor Create(const AVector: TIntegerDynArray); overload;
     constructor Create(const AVectorStr: string); overload;
     constructor Base(const ALength, ANumber: Integer);
-    // создает вектор с координатами
     procedure Assign(const ASource: TIntegerDynArray);
     procedure AssignTo(const ADest: TIntegerDynArray);
     function Low: Integer;
     function High: Integer;
-    procedure Zero; // Заполняет вектор "0"
-    procedure Fill(const AValue: Integer); // Заполняет вектор значением Value
+    procedure Zero;
+    procedure Fill(const AValue: Integer);
     procedure Add(const AValue: Integer = 1); overload;
     procedure Add(const AVector: TIntegerDynArray); overload;
     procedure Subtract(const AValue: Integer = 1); overload;
@@ -356,20 +331,15 @@ type
     function First(): Integer;
     function Last(): Integer;
     procedure Resize(const ALength: Integer; const ASaveData: Boolean = true);
-    // Изменяет размерность вектора
     property Item[const AIndex: Integer]: Integer read GetItem write SetItem;
     property PItem[const AIndex: Integer]: PInteger read GetPItem;
-    // координата вектора
     property Length: Integer read GetLength write SetLength;
-    // Размерность вектора
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Sum: Integer read GetSum; // Сумма элементов
-    property MaxValue: Integer read GetMaxValue; // Максимальное значение
-    property MinValue: Integer read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Sum: Integer read GetSum;
+    property MaxValue: Integer read GetMaxValue;
+    property MinValue: Integer read GetMinValue;
     property MaxIndex: Integer read GetMaxIndex;
-    // Индекс элнмента с максимальным значением
     property MinIndex: Integer read GetMinIndex;
-    // Индекс элнмента с минимальным  значением
     function IsZero: Boolean;
     function Prod: Integer;
     function ReverseArray: TIntegerDynArray;
@@ -377,7 +347,6 @@ type
     procedure Sort; overload;
     procedure Sort(var AIndexes: TIntegerDynArray); overload;
     procedure SortWithOrder(const AOrderIndexes: TIntegerDynArray);
-    // если индекса не будет в массиве, то элемент будет удален
     function Negative: TIntegerDynArray;
     function Equal(const AVector: TIntegerDynArray): Boolean; overload;
     function NotEqual(const AVector: TIntegerDynArray): Boolean; overload;
@@ -394,17 +363,6 @@ implementation
 uses
   System.Math, DAVLib.SwapOperation, DAVLib.SimpleTypesHelper,
   System.Generics.Collections;
-
-
-// class function TDoubleDynArrayHelper.Parse(const S: string): TDoubleDynArray;
-// begin
-// Result := StringToFloatArray(S);
-// end;
-//
-// class function TDoubleDynArrayHelper.TryParse(const S: string; out A: TDoubleDynArray): boolean;
-// begin
-// Result := TryStringToArray(S, A);
-// end;
 
 procedure TDoubleDynArrayHelper.Assign(const ASource: TDoubleDynArray);
 begin
@@ -491,15 +449,6 @@ begin
   Multiply(1 / AValue);
 end;
 
-//procedure TDoubleDynArrayHelper.Divide(const AVector: TDoubleDynArray);
-//var
-//  I: Integer;
-//begin
-//  NeedSameLength(Self.Length, AVector.Length);
-//  for I := Low to High do
-//    Self[I] := Self[I] / AVector[I];
-//end;
-
 procedure TDoubleDynArrayHelper.Subtract(const AValue: Double);
 var
   I: Integer;
@@ -563,8 +512,7 @@ constructor TDoubleDynArrayHelper.Create(const AVector: TDoubleDynArray);
 begin
   Self := Nil;
   Self := Copy(AVector);
-//  Self := TDoubleDynArray.Create(AVector.Length);
-//  Self.Assign(AVector);
+
 end;
 
 constructor TDoubleDynArrayHelper.Create(const AStart, AEnd, AStep: Integer);
@@ -636,7 +584,7 @@ var
 begin
   Assert(Assigned(AProc), 'Unassigned procedure');
   for I := Low to High do
-    AProc(Self[I]); // Check
+    AProc(Self[I]);
 end;
 
 function TDoubleDynArrayHelper.ForEach(const AProc: TEleventProc<Double>): TDoubleDynArray;
@@ -885,7 +833,7 @@ end;
 
 constructor TDoubleDynArrayHelper.Create(const AVectorStr: string);
 begin
-   Self :=  TDoubleDynArray.Parse(AVectorStr);
+  Self := TDoubleDynArray.Parse(AVectorStr);
 end;
 
 procedure TDoubleDynArrayHelper.PositiveInfinity;
@@ -1125,7 +1073,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TDoubleDynArrayHelper.ToString: string;
@@ -1136,7 +1084,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TDoubleDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
@@ -1147,7 +1095,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TDoubleDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
@@ -1158,7 +1106,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TDoubleDynArrayHelper._ToString(const ASeparator: string): string;
@@ -1169,12 +1117,8 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(ASeparator, R);
+  Result := '[' + string.Join(ASeparator, R) + ']';
 end;
-
-///
-/// Single
-///
 
 procedure TSingleDynArrayHelper.Assign(const ASource: TSingleDynArray);
 begin
@@ -1260,15 +1204,6 @@ procedure TSingleDynArrayHelper.Divide(const AValue: Single);
 begin
   Multiply(1 / AValue);
 end;
-
-//procedure TSingleDynArrayHelper.Divide(const AVector: TSingleDynArray);
-//var
-//  I: Integer;
-//begin
-//  NeedSameLength(Self.Length, AVector.Length);
-//  for I := Low to High do
-//    Self[I] := Self[I] / AVector[I];
-//end;
 
 procedure TSingleDynArrayHelper.Subtract(const AValue: Single);
 var
@@ -1398,7 +1333,7 @@ var
 begin
   Assert(Assigned(AProc), 'Unassigned procedure');
   for I := Low to High do
-    AProc(Self[I]); // Check
+    AProc(Self[I]);
 end;
 
 function TSingleDynArrayHelper.ForEach(const AProc: TEleventProc<Single>): TSingleDynArray;
@@ -1640,8 +1575,7 @@ begin
     Self[I].NegativeInfinity;
 end;
 
-class function TSingleDynArrayHelper.Parse(
-  const AVectorStr: string): TSingleDynArray;
+class function TSingleDynArrayHelper.Parse(const AVectorStr: string): TSingleDynArray;
 var
   LStrArray: TStringDynArray;
   L: Integer;
@@ -1657,7 +1591,7 @@ end;
 
 constructor TSingleDynArrayHelper.Create(const AVectorStr: string);
 begin
-   Self :=  TSingleDynArray.Parse(AVectorStr);
+  Self := TSingleDynArray.Parse(AVectorStr);
 end;
 
 procedure TSingleDynArrayHelper.PositiveInfinity;
@@ -1897,7 +1831,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TSingleDynArrayHelper.ToString: string;
@@ -1908,7 +1842,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TSingleDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
@@ -1919,7 +1853,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TSingleDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
@@ -1930,7 +1864,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TSingleDynArrayHelper._ToString(const ASeparator: string): string;
@@ -1941,12 +1875,8 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(ASeparator, R);
+  Result := '[' + string.Join(ASeparator, R) + ']';
 end;
-
-///
-/// Extended
-///
 
 procedure TExtendedDynArrayHelper.Assign(const ASource: TExtendedDynArray);
 begin
@@ -2032,15 +1962,6 @@ procedure TExtendedDynArrayHelper.Divide(const AValue: Extended);
 begin
   Multiply(1 / AValue);
 end;
-
-//procedure TExtendedDynArrayHelper.Divide(const AVector: TExtendedDynArray);
-//var
-//  I: Integer;
-//begin
-//  NeedSameLength(Self.Length, AVector.Length);
-//  for I := Low to High do
-//    Self[I] := Self[I] / AVector[I];
-//end;
 
 procedure TExtendedDynArrayHelper.Subtract(const AValue: Extended);
 var
@@ -2170,7 +2091,7 @@ var
 begin
   Assert(Assigned(AProc), 'Unassigned procedure');
   for I := Low to High do
-    AProc(Self[I]); // Check
+    AProc(Self[I]);
 end;
 
 function TExtendedDynArrayHelper.ForEach(const AProc: TEleventProc<Extended>): TExtendedDynArray;
@@ -2412,8 +2333,7 @@ begin
     Self[I].NegativeInfinity;
 end;
 
-class function TExtendedDynArrayHelper.Parse(
-  const AVectorStr: string): TExtendedDynArray;
+class function TExtendedDynArrayHelper.Parse(const AVectorStr: string): TExtendedDynArray;
 var
   LStrArray: TStringDynArray;
   L: Integer;
@@ -2429,7 +2349,7 @@ end;
 
 constructor TExtendedDynArrayHelper.Create(const AVectorStr: string);
 begin
-   Self :=  TExtendedDynArray.Parse(AVectorStr);
+  Self := TExtendedDynArray.Parse(AVectorStr);
 end;
 
 procedure TExtendedDynArrayHelper.PositiveInfinity;
@@ -2669,7 +2589,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TExtendedDynArrayHelper.ToString: string;
@@ -2680,7 +2600,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TExtendedDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
@@ -2691,7 +2611,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TExtendedDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
@@ -2702,7 +2622,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TExtendedDynArrayHelper._ToString(const ASeparator: string): string;
@@ -2713,12 +2633,8 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(ASeparator, R);
+  Result := '[' + string.Join(ASeparator, R) + ']';
 end;
-
-///
-/// Integer
-///
 
 procedure TIntegerDynArrayHelper.Assign(const ASource: TIntegerDynArray);
 begin
@@ -2864,7 +2780,7 @@ var
 begin
   Assert(Assigned(AProc), 'Unassigned procedure');
   for I := Low to High do
-    AProc(Self[I]); // Check
+    AProc(Self[I]);
 end;
 
 function TIntegerDynArrayHelper.ForEach(const AProc: TEleventProc<Integer>): TIntegerDynArray;
@@ -3038,8 +2954,7 @@ begin
   Result := Self[High];
 end;
 
-class function TIntegerDynArrayHelper.Parse(
-  const AVectorStr: string): TIntegerDynArray;
+class function TIntegerDynArrayHelper.Parse(const AVectorStr: string): TIntegerDynArray;
 var
   LStrArray: TStringDynArray;
   L: Integer;
@@ -3055,7 +2970,7 @@ end;
 
 constructor TIntegerDynArrayHelper.Create(const AVectorStr: string);
 begin
-   Self :=  TIntegerDynArray.Parse(AVectorStr);
+  Self := TIntegerDynArray.Parse(AVectorStr);
 end;
 
 function TIntegerDynArrayHelper.Prod: Integer;
@@ -3187,7 +3102,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TIntegerDynArrayHelper._ToString(const ASeparator: string): string;
@@ -3198,10 +3113,8 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(ASeparator, R);
+  Result := '[' + string.Join(ASeparator, R) + ']';
 end;
-
-
 
 end.
 

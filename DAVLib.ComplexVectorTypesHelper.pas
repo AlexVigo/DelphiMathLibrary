@@ -2,8 +2,9 @@ unit DAVLib.ComplexVectorTypesHelper;
 
 interface
 
-uses DAVLib.ComplexType, DAVLib.Types, System.SysUtils,
-  DAVLib.SimpleTypesHelper, DAVLib.VectorTypesHelper;
+uses
+  DAVLib.ComplexType, DAVLib.Types, System.SysUtils, DAVLib.SimpleTypesHelper,
+  DAVLib.VectorTypesHelper;
 
 type
   TDComplexDynArrayHelper = record helper for TDComplexDynArray
@@ -27,18 +28,17 @@ type
     function MaxItem(var AIndex: Integer): TDComplex;
     function MinItem(var AIndex: Integer): TDComplex;
     constructor Create(const ALength: Integer); overload;
-    constructor Create(const AStart, AEnd: Integer;
-      const AStep: Integer = 1); overload;
+    constructor Create(const AVectorStr: string); overload;
+    constructor Create(const AStart, AEnd: Integer; const AStep: Integer = 1); overload;
     constructor Ones(const ALength: Integer);
     constructor Create(const AVector: TDComplexDynArray); overload;
     constructor Base(const ALength, ANumber: Integer);
-    // создает вектор с координатами
     procedure Assign(const ASource: TDComplexDynArray);
     procedure AssignTo(const ADest: TDComplexDynArray);
     function Low: Integer;
     function High: Integer;
-    procedure Zero; // Заполняет вектор "0"
-    procedure Fill(const AValue: TDComplex); // Заполняет вектор значением Value
+    procedure Zero;
+    procedure Fill(const AValue: TDComplex);
     procedure Multiply(const AValue: TDComplex); overload;
     procedure Multiply(const AVector: TDComplexDynArray); overload;
     procedure Add(const AValue: TDComplex); overload;
@@ -49,32 +49,26 @@ type
     procedure Subtract(const AVector: TDComplexDynArray); overload;
     function ForEach(const AProc: TEleventProc<TDComplex>): TDComplexDynArray;
     procedure Apply(const AProc: TEleventProc<TDComplex>);
-    procedure Normalize; // Нормирует вектор: Vi = Vi/MaxValue
-    function Normalized: TDComplexDynArray; // Возвращает нормированный вектор
-    procedure MakeUnitVector; // Делает вектор единичным
-    function AsUnitVector: TDComplexDynArray; // Возвращает единичный вектор
+    procedure Normalize;
+    function Normalized: TDComplexDynArray;
+    procedure MakeUnitVector;
+    function AsUnitVector: TDComplexDynArray;
     function First(): TDComplex;
     function Last(): TDComplex;
-
     procedure Resize(const ALength: Integer; const ASaveData: Boolean = true);
-    // Изменяет размерность вектора
     property Item[const AIndex: Integer]: TDComplex read GetItem write SetItem;
     property PItem[const AIndex: Integer]: PDComplex read GetPItem;
-    // координата вектора
     property Length: Integer read GetLength write SetLength;
-    // Размерность вектора
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: TDComplex read GetNorm; // Норма вектора
-    property Sum: TDComplex read GetSum; // Сумма элементов
-    property Mean: TDComplex read GetMean; // Сумма элементов
-    property Variance: TDComplex read GetVariance; // Дисперсия
-    property Deviation: TDComplex read GetDeviation; // СКО
-    property MaxValue: TDComplex read GetMaxValue; // Максимальное значение
-    property MinValue: TDComplex read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: TDComplex read GetNorm;
+    property Sum: TDComplex read GetSum;
+    property Mean: TDComplex read GetMean;
+    property Variance: TDComplex read GetVariance;
+    property Deviation: TDComplex read GetDeviation;
+    property MaxValue: TDComplex read GetMaxValue;
+    property MinValue: TDComplex read GetMinValue;
     property MaxIndex: Integer read GetMaxIndex;
-    // Индекс элнмента с максимальным значением
     property MinIndex: Integer read GetMinIndex;
-    // Индекс элнмента с минимальным  значением
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -83,14 +77,13 @@ type
     function IsInfinity: Boolean;
     function IsNegativeInfinity: Boolean;
     function IsPositiveInfinity: Boolean;
-    function Inverse: TDComplexDynArray; { inverse : r := 1 / z }
+    function Inverse: TDComplexDynArray;
     function Prod: TDComplex;
     function ReverseArray: TDComplexDynArray;
     function DeleteIndexes(const AIndexes: TIntegerDynArray): TDComplexDynArray;
     procedure Sort; overload;
     procedure Sort(var AIndexes: TIntegerDynArray); overload;
     procedure SortWithOrder(const AOrderIndexes: TIntegerDynArray);
-    // если индекса не будет в массиве, то элемент будет удален
     function Negative: TDComplexDynArray;
     function Equal(const AVector: TDComplexDynArray): Boolean; overload;
     function NotEqual(const AVector: TDComplexDynArray): Boolean; overload;
@@ -105,13 +98,9 @@ type
     function ToString: string; overload;
     function _ToString(const ASeparator: string): string;
     function ToString(const AFormatSettings: TFormatSettings): string; overload;
-    function ToString(const AFormat: TFloatFormat;
-      const APrecision, ADigits: Integer): string; overload;
-    function ToString(const AFormat: TFloatFormat;
-      const APrecision, ADigits: Integer;
-      const AFormatSettings: TFormatSettings): string; overload;
-
-    constructor Create(const aVectorRe, aVectorIm: TDoubleDynArray); overload;
+    function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string; overload;
+    function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string; overload;
+    constructor Create(const AVectorRe, AVectorIm: TDoubleDynArray); overload;
     constructor Create(const AVector: TDoubleDynArray); overload;
     function Real: TDoubleDynArray;
     function Imag: TDoubleDynArray;
@@ -119,6 +108,10 @@ type
     procedure ClearImag;
     procedure Conjugate();
     procedure i1();
+    function SqrAbs: TDoubleDynArray;
+    function Magnitude: TDoubleDynArray;
+    function Angle: TDoubleDynArray;
+    class function Parse(const AVectorStr: string): TDComplexDynArray; static;
   end;
 
   TSComplexDynArrayHelper = record helper for TSComplexDynArray
@@ -142,18 +135,17 @@ type
     function MaxItem(var AIndex: Integer): TSComplex;
     function MinItem(var AIndex: Integer): TSComplex;
     constructor Create(const ALength: Integer); overload;
-    constructor Create(const AStart, AEnd: Integer;
-      const AStep: Integer = 1); overload;
+    constructor Create(const AStart, AEnd: Integer; const AStep: Integer = 1); overload;
+    constructor Create(const AVectorStr: string); overload;
     constructor Ones(const ALength: Integer);
     constructor Create(const AVector: TSComplexDynArray); overload;
     constructor Base(const ALength, ANumber: Integer);
-    // создает вектор с координатами
     procedure Assign(const ASource: TSComplexDynArray);
     procedure AssignTo(const ADest: TSComplexDynArray);
     function Low: Integer;
     function High: Integer;
-    procedure Zero; // Заполняет вектор "0"
-    procedure Fill(const AValue: TSComplex); // Заполняет вектор значением Value
+    procedure Zero;
+    procedure Fill(const AValue: TSComplex);
     procedure Multiply(const AValue: TSComplex); overload;
     procedure Multiply(const AVector: TSComplexDynArray); overload;
     procedure Add(const AValue: TSComplex); overload;
@@ -164,32 +156,26 @@ type
     procedure Subtract(const AVector: TSComplexDynArray); overload;
     function ForEach(const AProc: TEleventProc<TSComplex>): TSComplexDynArray;
     procedure Apply(const AProc: TEleventProc<TSComplex>);
-    procedure Normalize; // Нормирует вектор: Vi = Vi/MaxValue
-    function Normalized: TSComplexDynArray; // Возвращает нормированный вектор
-    procedure MakeUnitVector; // Делает вектор единичным
-    function AsUnitVector: TSComplexDynArray; // Возвращает единичный вектор
+    procedure Normalize;
+    function Normalized: TSComplexDynArray;
+    procedure MakeUnitVector;
+    function AsUnitVector: TSComplexDynArray;
     function First(): TSComplex;
     function Last(): TSComplex;
-
     procedure Resize(const ALength: Integer; const ASaveData: Boolean = true);
-    // Изменяет размерность вектора
     property Item[const AIndex: Integer]: TSComplex read GetItem write SetItem;
     property PItem[const AIndex: Integer]: PSComplex read GetPItem;
-    // координата вектора
     property Length: Integer read GetLength write SetLength;
-    // Размерность вектора
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: TSComplex read GetNorm; // Норма вектора
-    property Sum: TSComplex read GetSum; // Сумма элементов
-    property Mean: TSComplex read GetMean; // Сумма элементов
-    property Variance: TSComplex read GetVariance; // Дисперсия
-    property Deviation: TSComplex read GetDeviation; // СКО
-    property MaxValue: TSComplex read GetMaxValue; // Максимальное значение
-    property MinValue: TSComplex read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: TSComplex read GetNorm;
+    property Sum: TSComplex read GetSum;
+    property Mean: TSComplex read GetMean;
+    property Variance: TSComplex read GetVariance;
+    property Deviation: TSComplex read GetDeviation;
+    property MaxValue: TSComplex read GetMaxValue;
+    property MinValue: TSComplex read GetMinValue;
     property MaxIndex: Integer read GetMaxIndex;
-    // Индекс элнмента с максимальным значением
     property MinIndex: Integer read GetMinIndex;
-    // Индекс элнмента с минимальным  значением
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -198,14 +184,13 @@ type
     function IsInfinity: Boolean;
     function IsNegativeInfinity: Boolean;
     function IsPositiveInfinity: Boolean;
-    function Inverse: TSComplexDynArray; { inverse : r := 1 / z }
+    function Inverse: TSComplexDynArray;
     function Prod: TSComplex;
     function ReverseArray: TSComplexDynArray;
     function DeleteIndexes(const AIndexes: TIntegerDynArray): TSComplexDynArray;
     procedure Sort; overload;
     procedure Sort(var AIndexes: TIntegerDynArray); overload;
     procedure SortWithOrder(const AOrderIndexes: TIntegerDynArray);
-    // если индекса не будет в массиве, то элемент будет удален
     function Negative: TSComplexDynArray;
     function Equal(const AVector: TSComplexDynArray): Boolean; overload;
     function NotEqual(const AVector: TSComplexDynArray): Boolean; overload;
@@ -220,13 +205,9 @@ type
     function ToString: string; overload;
     function _ToString(const ASeparator: string): string;
     function ToString(const AFormatSettings: TFormatSettings): string; overload;
-    function ToString(const AFormat: TFloatFormat;
-      const APrecision, ADigits: Integer): string; overload;
-    function ToString(const AFormat: TFloatFormat;
-      const APrecision, ADigits: Integer;
-      const AFormatSettings: TFormatSettings): string; overload;
-
-    constructor Create(const aVectorRe, aVectorIm: TSingleDynArray); overload;
+    function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string; overload;
+    function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string; overload;
+    constructor Create(const AVectorRe, AVectorIm: TSingleDynArray); overload;
     constructor Create(const AVector: TSingleDynArray); overload;
     function Real: TSingleDynArray;
     function Imag: TSingleDynArray;
@@ -234,6 +215,10 @@ type
     procedure ClearImag;
     procedure Conjugate();
     procedure i1();
+    function SqrAbs: TSingleDynArray;
+    function Magnitude: TSingleDynArray;
+    function Angle: TSingleDynArray;
+    class function Parse(const AVectorStr: string): TSComplexDynArray; static;
   end;
 
   TEComplexDynArrayHelper = record helper for TEComplexDynArray
@@ -257,18 +242,17 @@ type
     function MaxItem(var AIndex: Integer): TEComplex;
     function MinItem(var AIndex: Integer): TEComplex;
     constructor Create(const ALength: Integer); overload;
-    constructor Create(const AStart, AEnd: Integer;
-      const AStep: Integer = 1); overload;
+    constructor Create(const AStart, AEnd: Integer; const AStep: Integer = 1); overload;
+    constructor Create(const AVectorStr: string); overload;
     constructor Ones(const ALength: Integer);
     constructor Create(const AVector: TEComplexDynArray); overload;
     constructor Base(const ALength, ANumber: Integer);
-    // создает вектор с координатами
     procedure Assign(const ASource: TEComplexDynArray);
     procedure AssignTo(const ADest: TEComplexDynArray);
     function Low: Integer;
     function High: Integer;
-    procedure Zero; // Заполняет вектор "0"
-    procedure Fill(const AValue: TEComplex); // Заполняет вектор значением Value
+    procedure Zero;
+    procedure Fill(const AValue: TEComplex);
     procedure Multiply(const AValue: TEComplex); overload;
     procedure Multiply(const AVector: TEComplexDynArray); overload;
     procedure Add(const AValue: TEComplex); overload;
@@ -279,32 +263,26 @@ type
     procedure Subtract(const AVector: TEComplexDynArray); overload;
     function ForEach(const AProc: TEleventProc<TEComplex>): TEComplexDynArray;
     procedure Apply(const AProc: TEleventProc<TEComplex>);
-    procedure Normalize; // Нормирует вектор: Vi = Vi/MaxValue
-    function Normalized: TEComplexDynArray; // Возвращает нормированный вектор
-    procedure MakeUnitVector; // Делает вектор единичным
-    function AsUnitVector: TEComplexDynArray; // Возвращает единичный вектор
+    procedure Normalize;
+    function Normalized: TEComplexDynArray;
+    procedure MakeUnitVector;
+    function AsUnitVector: TEComplexDynArray;
     function First(): TEComplex;
     function Last(): TEComplex;
-
     procedure Resize(const ALength: Integer; const ASaveData: Boolean = true);
-    // Изменяет размерность вектора
     property Item[const AIndex: Integer]: TEComplex read GetItem write SetItem;
     property PItem[const AIndex: Integer]: PEComplex read GetPItem;
-    // координата вектора
     property Length: Integer read GetLength write SetLength;
-    // Размерность вектора
-    property Size: Integer read GetSize; // Размер вектора в байтах
-    property Norm: TEComplex read GetNorm; // Норма вектора
-    property Sum: TEComplex read GetSum; // Сумма элементов
-    property Mean: TEComplex read GetMean; // Сумма элементов
-    property Variance: TEComplex read GetVariance; // Дисперсия
-    property Deviation: TEComplex read GetDeviation; // СКО
-    property MaxValue: TEComplex read GetMaxValue; // Максимальное значение
-    property MinValue: TEComplex read GetMinValue; // Минимальное  значение
+    property Size: Integer read GetSize;
+    property Norm: TEComplex read GetNorm;
+    property Sum: TEComplex read GetSum;
+    property Mean: TEComplex read GetMean;
+    property Variance: TEComplex read GetVariance;
+    property Deviation: TEComplex read GetDeviation;
+    property MaxValue: TEComplex read GetMaxValue;
+    property MinValue: TEComplex read GetMinValue;
     property MaxIndex: Integer read GetMaxIndex;
-    // Индекс элнмента с максимальным значением
     property MinIndex: Integer read GetMinIndex;
-    // Индекс элнмента с минимальным  значением
     procedure NaN;
     procedure NegativeInfinity;
     procedure PositiveInfinity;
@@ -313,14 +291,13 @@ type
     function IsInfinity: Boolean;
     function IsNegativeInfinity: Boolean;
     function IsPositiveInfinity: Boolean;
-    function Inverse: TEComplexDynArray; { inverse : r := 1 / z }
+    function Inverse: TEComplexDynArray;
     function Prod: TEComplex;
     function ReverseArray: TEComplexDynArray;
     function DeleteIndexes(const AIndexes: TIntegerDynArray): TEComplexDynArray;
     procedure Sort; overload;
     procedure Sort(var AIndexes: TIntegerDynArray); overload;
     procedure SortWithOrder(const AOrderIndexes: TIntegerDynArray);
-    // если индекса не будет в массиве, то элемент будет удален
     function Negative: TEComplexDynArray;
     function Equal(const AVector: TEComplexDynArray): Boolean; overload;
     function NotEqual(const AVector: TEComplexDynArray): Boolean; overload;
@@ -335,13 +312,9 @@ type
     function ToString: string; overload;
     function _ToString(const ASeparator: string): string;
     function ToString(const AFormatSettings: TFormatSettings): string; overload;
-    function ToString(const AFormat: TFloatFormat;
-      const APrecision, ADigits: Integer): string; overload;
-    function ToString(const AFormat: TFloatFormat;
-      const APrecision, ADigits: Integer;
-      const AFormatSettings: TFormatSettings): string; overload;
-
-    constructor Create(const aVectorRe, aVectorIm: TExtendedDynArray); overload;
+    function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string; overload;
+    function ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string; overload;
+    constructor Create(const AVectorRe, AVectorIm: TExtendedDynArray); overload;
     constructor Create(const AVector: TExtendedDynArray); overload;
     function Real: TExtendedDynArray;
     function Imag: TExtendedDynArray;
@@ -349,13 +322,16 @@ type
     procedure ClearImag;
     procedure Conjugate();
     procedure i1();
+    function SqrAbs: TExtendedDynArray;
+    function Magnitude: TExtendedDynArray;
+    function Angle: TExtendedDynArray;
+    class function Parse(const AVectorStr: string): TEComplexDynArray; static;
   end;
 
 implementation
 
 uses
-  System.Math, DAVLib.SwapOperation,
-  System.Generics.Collections;
+  System.Math, DAVLib.SwapOperation, System.Generics.Collections;
 
 procedure TDComplexDynArrayHelper.Assign(const ASource: TDComplexDynArray);
 begin
@@ -462,8 +438,7 @@ begin
     Result[I] := -Self[I];
 end;
 
-function TDComplexDynArrayHelper.Equal(const AVector
-  : TDComplexDynArray): Boolean;
+function TDComplexDynArrayHelper.Equal(const AVector: TDComplexDynArray): Boolean;
 var
   L, I: Integer;
 begin
@@ -477,10 +452,9 @@ begin
   Result := I > L;
 end;
 
-function TDComplexDynArrayHelper.NotEqual(const AVector
-  : TDComplexDynArray): Boolean;
+function TDComplexDynArrayHelper.NotEqual(const AVector: TDComplexDynArray): Boolean;
 begin
-  Result := not(Self.Equal(AVector));
+  Result := not (Self.Equal(AVector));
 end;
 
 function TDComplexDynArrayHelper.Equal(const AValue: TDComplex): Boolean;
@@ -494,7 +468,7 @@ end;
 
 function TDComplexDynArrayHelper.NotEqual(const AValue: TDComplex): Boolean;
 begin
-  Result := not(Self.Equal(AValue));
+  Result := not (Self.Equal(AValue));
 end;
 
 constructor TDComplexDynArrayHelper.Base(const ALength, ANumber: Integer);
@@ -509,7 +483,7 @@ end;
 constructor TDComplexDynArrayHelper.Create(const AVector: TDComplexDynArray);
 begin
   Self := Nil;
-    Self := Copy(AVector);
+  Self := Copy(AVector);
 end;
 
 constructor TDComplexDynArrayHelper.Create(const AStart, AEnd, AStep: Integer);
@@ -575,11 +549,10 @@ var
 begin
   Assert(Assigned(AProc), 'Unassigned procedure');
   for I := Low to High do
-    AProc(Self[I]); // Check
+    AProc(Self[I]);
 end;
 
-function TDComplexDynArrayHelper.ForEach(const AProc: TEleventProc<TDComplex>)
-  : TDComplexDynArray;
+function TDComplexDynArrayHelper.ForEach(const AProc: TEleventProc<TDComplex>): TDComplexDynArray;
 begin
   Result := TDComplexDynArray.Create(Self);
   Result.Apply(AProc);
@@ -628,8 +601,7 @@ begin
   end;
 
   for I := AIndex + 1 to High do
-    if (Self[I] > Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity)
-    then
+    if (Self[I] > Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity) then
     begin
       Result := Self[I];
       AIndex := I
@@ -672,8 +644,7 @@ begin
     Result := Self[AIndex];
   end;
   for I := AIndex + 1 to High do
-    if (Self[I] < Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity)
-    then
+    if (Self[I] < Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity) then
     begin
       Result := Self[I];
       AIndex := I
@@ -784,8 +755,7 @@ begin
     Result[I] := Self[I].Re;
 end;
 
-procedure TDComplexDynArrayHelper.Resize(const ALength: Integer;
-  const ASaveData: Boolean = true);
+procedure TDComplexDynArrayHelper.Resize(const ALength: Integer; const ASaveData: Boolean = true);
 begin
   if Length <> ALength then
     System.SetLength(Self, ALength);
@@ -794,8 +764,7 @@ begin
     Zero;
 end;
 
-procedure TDComplexDynArrayHelper.SetItem(const AIndex: Integer;
-  const AValue: TDComplex);
+procedure TDComplexDynArrayHelper.SetItem(const AIndex: Integer; const AValue: TDComplex);
 begin
   if not InRange(AIndex, Low, High) then
     raise EComplexVectorError.Create('Index not in range of vector bounds');
@@ -828,6 +797,25 @@ var
 begin
   for I := Low to High do
     Self[I].NegativeInfinity;
+end;
+
+class function TDComplexDynArrayHelper.Parse(const AVectorStr: string): TDComplexDynArray;
+var
+  LStrArray: TStringDynArray;
+  L: Integer;
+  I: Integer;
+begin
+  LStrArray := AVectorStr.Trim(UnexpectedSymbolsInMatrixOrVectors).Split([VectorItemDelimiter]);
+  L := System.Length(LStrArray);
+  Result := TDComplexDynArray.Create(L);
+  System.Dec(L);
+  for I := 0 to L do
+    Result[I] := TDComplex.Create(LStrArray[I]);
+end;
+
+constructor TDComplexDynArrayHelper.Create(const AVectorStr: string);
+begin
+  Self := TDComplexDynArray.Parse(AVectorStr);
 end;
 
 procedure TDComplexDynArrayHelper.PositiveInfinity;
@@ -973,8 +961,7 @@ begin
   end;
 end;
 
-function TDComplexDynArrayHelper.DeleteIndexes(const AIndexes: TIntegerDynArray)
-  : TDComplexDynArray;
+function TDComplexDynArrayHelper.DeleteIndexes(const AIndexes: TIntegerDynArray): TDComplexDynArray;
 var
   J, L, K: Integer;
 begin
@@ -992,8 +979,7 @@ begin
   end;
 end;
 
-function TDComplexDynArrayHelper.DeleteValues(const AStates: TBooleanDynArray)
-  : TDComplexDynArray;
+function TDComplexDynArrayHelper.DeleteValues(const AStates: TBooleanDynArray): TDComplexDynArray;
 var
   I, LCounter: Integer;
 begin
@@ -1025,8 +1011,7 @@ var
   Pivot, T: TDComplex;
   I, ti: Integer;
 
-  procedure qSort(var a: TDComplexDynArray; iLo, iHi: Integer;
-    var AIndexes: TIntegerDynArray);
+  procedure qSort(var a: TDComplexDynArray; iLo, iHi: Integer; var AIndexes: TIntegerDynArray);
   begin
     Lo := iLo;
     Hi := iHi;
@@ -1062,8 +1047,7 @@ begin
   qSort(Self, Low, High, AIndexes);
 end;
 
-procedure TDComplexDynArrayHelper.SortWithOrder(const AOrderIndexes
-  : TIntegerDynArray);
+procedure TDComplexDynArrayHelper.SortWithOrder(const AOrderIndexes: TIntegerDynArray);
 var
   I: Integer;
 begin
@@ -1072,8 +1056,34 @@ begin
   Resize(System.Length(AOrderIndexes));
 end;
 
-function TDComplexDynArrayHelper.ToString(const AFormatSettings
-  : TFormatSettings): string;
+function TDComplexDynArrayHelper.SqrAbs: TDoubleDynArray;
+var
+  I: Integer;
+begin
+  Result := TDoubleDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].SqrAbs;
+end;
+
+function TDComplexDynArrayHelper.Magnitude: TDoubleDynArray;
+var
+  I: Integer;
+begin
+  Result := TDoubleDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].Magnitude;
+end;
+
+function TDComplexDynArrayHelper.Angle: TDoubleDynArray;
+var
+  I: Integer;
+begin
+  Result := TDoubleDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].Angle;
+end;
+
+function TDComplexDynArrayHelper.ToString(const AFormatSettings: TFormatSettings): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -1081,7 +1091,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TDComplexDynArrayHelper.ToString: string;
@@ -1092,12 +1102,10 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
-function TDComplexDynArrayHelper.ToString(const AFormat: TFloatFormat;
-  const APrecision, ADigits: Integer;
-  const AFormatSettings: TFormatSettings): string;
+function TDComplexDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -1105,11 +1113,10 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
-function TDComplexDynArrayHelper.ToString(const AFormat: TFloatFormat;
-  const APrecision, ADigits: Integer): string;
+function TDComplexDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -1117,7 +1124,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TDComplexDynArrayHelper._ToString(const ASeparator: string): string;
@@ -1128,7 +1135,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(ASeparator, R);
+  Result := '[' + string.Join(ASeparator, R) + ']';
 end;
 
 procedure TDComplexDynArrayHelper.ClearImag;
@@ -1164,19 +1171,14 @@ begin
     Self[I].SetValue(AVector[I]);
 end;
 
-constructor TDComplexDynArrayHelper.Create(const aVectorRe,
-  aVectorIm: TDoubleDynArray);
+constructor TDComplexDynArrayHelper.Create(const AVectorRe, AVectorIm: TDoubleDynArray);
 var
   I: Integer;
 begin
-  Self := TDComplexDynArray.Create(aVectorRe.Length);
+  Self := TDComplexDynArray.Create(AVectorRe.Length);
   for I := Low to High do
-    Self[I].SetValue(aVectorRe[I], aVectorIm[I]);
+    Self[I].SetValue(AVectorRe[I], AVectorIm[I]);
 end;
-
-///
-/// Single
-///
 
 procedure TSComplexDynArrayHelper.Assign(const ASource: TSComplexDynArray);
 begin
@@ -1283,8 +1285,7 @@ begin
     Result[I] := -Self[I];
 end;
 
-function TSComplexDynArrayHelper.Equal(const AVector
-  : TSComplexDynArray): Boolean;
+function TSComplexDynArrayHelper.Equal(const AVector: TSComplexDynArray): Boolean;
 var
   L, I: Integer;
 begin
@@ -1298,10 +1299,9 @@ begin
   Result := I > L;
 end;
 
-function TSComplexDynArrayHelper.NotEqual(const AVector
-  : TSComplexDynArray): Boolean;
+function TSComplexDynArrayHelper.NotEqual(const AVector: TSComplexDynArray): Boolean;
 begin
-  Result := not(Self.Equal(AVector));
+  Result := not (Self.Equal(AVector));
 end;
 
 function TSComplexDynArrayHelper.Equal(const AValue: TSComplex): Boolean;
@@ -1315,7 +1315,7 @@ end;
 
 function TSComplexDynArrayHelper.NotEqual(const AValue: TSComplex): Boolean;
 begin
-  Result := not(Self.Equal(AValue));
+  Result := not (Self.Equal(AValue));
 end;
 
 constructor TSComplexDynArrayHelper.Base(const ALength, ANumber: Integer);
@@ -1330,7 +1330,7 @@ end;
 constructor TSComplexDynArrayHelper.Create(const AVector: TSComplexDynArray);
 begin
   Self := Nil;
-    Self := Copy(AVector);
+  Self := Copy(AVector);
 end;
 
 constructor TSComplexDynArrayHelper.Create(const AStart, AEnd, AStep: Integer);
@@ -1349,6 +1349,25 @@ constructor TSComplexDynArrayHelper.Create(const ALength: Integer);
 begin
   Self := Nil;
   Self.Length := ALength;
+end;
+
+class function TSComplexDynArrayHelper.Parse(const AVectorStr: string): TSComplexDynArray;
+var
+  LStrArray: TStringDynArray;
+  L: Integer;
+  I: Integer;
+begin
+  LStrArray := AVectorStr.Trim(UnexpectedSymbolsInMatrixOrVectors).Split([VectorItemDelimiter]);
+  L := System.Length(LStrArray);
+  Result := TSComplexDynArray.Create(L);
+  System.Dec(L);
+  for I := 0 to L do
+    Result[I] := TSComplex.Create(LStrArray[I]);
+end;
+
+constructor TSComplexDynArrayHelper.Create(const AVectorStr: string);
+begin
+  Self := TSComplexDynArray.Parse(AVectorStr);
 end;
 
 constructor TSComplexDynArrayHelper.Ones(const ALength: Integer);
@@ -1396,11 +1415,10 @@ var
 begin
   Assert(Assigned(AProc), 'Unassigned procedure');
   for I := Low to High do
-    AProc(Self[I]); // Check
+    AProc(Self[I]);
 end;
 
-function TSComplexDynArrayHelper.ForEach(const AProc: TEleventProc<TSComplex>)
-  : TSComplexDynArray;
+function TSComplexDynArrayHelper.ForEach(const AProc: TEleventProc<TSComplex>): TSComplexDynArray;
 begin
   Result := TSComplexDynArray.Create(Self);
   Result.Apply(AProc);
@@ -1449,8 +1467,7 @@ begin
   end;
 
   for I := AIndex + 1 to High do
-    if (Self[I] > Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity)
-    then
+    if (Self[I] > Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity) then
     begin
       Result := Self[I];
       AIndex := I
@@ -1493,8 +1510,7 @@ begin
     Result := Self[AIndex];
   end;
   for I := AIndex + 1 to High do
-    if (Self[I] < Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity)
-    then
+    if (Self[I] < Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity) then
     begin
       Result := Self[I];
       AIndex := I
@@ -1577,6 +1593,33 @@ begin
     Self[I] := Self[I].i1;
 end;
 
+function TSComplexDynArrayHelper.SqrAbs: TSingleDynArray;
+var
+  I: Integer;
+begin
+  Result := TSingleDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].SqrAbs;
+end;
+
+function TSComplexDynArrayHelper.Magnitude: TSingleDynArray;
+var
+  I: Integer;
+begin
+  Result := TSingleDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].Magnitude;
+end;
+
+function TSComplexDynArrayHelper.Angle: TSingleDynArray;
+var
+  I: Integer;
+begin
+  Result := TSingleDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].Angle;
+end;
+
 procedure TSComplexDynArrayHelper.Normalize;
 var
   D: TSComplex;
@@ -1605,8 +1648,7 @@ begin
     Result[I] := Self[I].Re;
 end;
 
-procedure TSComplexDynArrayHelper.Resize(const ALength: Integer;
-  const ASaveData: Boolean = true);
+procedure TSComplexDynArrayHelper.Resize(const ALength: Integer; const ASaveData: Boolean = true);
 begin
   if Length <> ALength then
     System.SetLength(Self, ALength);
@@ -1615,8 +1657,7 @@ begin
     Zero;
 end;
 
-procedure TSComplexDynArrayHelper.SetItem(const AIndex: Integer;
-  const AValue: TSComplex);
+procedure TSComplexDynArrayHelper.SetItem(const AIndex: Integer; const AValue: TSComplex);
 begin
   if not InRange(AIndex, Low, High) then
     raise EComplexVectorError.Create('Index not in range of vector bounds');
@@ -1794,8 +1835,7 @@ begin
   end;
 end;
 
-function TSComplexDynArrayHelper.DeleteIndexes(const AIndexes: TIntegerDynArray)
-  : TSComplexDynArray;
+function TSComplexDynArrayHelper.DeleteIndexes(const AIndexes: TIntegerDynArray): TSComplexDynArray;
 var
   J, L, K: Integer;
 begin
@@ -1813,8 +1853,7 @@ begin
   end;
 end;
 
-function TSComplexDynArrayHelper.DeleteValues(const AStates: TBooleanDynArray)
-  : TSComplexDynArray;
+function TSComplexDynArrayHelper.DeleteValues(const AStates: TBooleanDynArray): TSComplexDynArray;
 var
   I, LCounter: Integer;
 begin
@@ -1846,8 +1885,7 @@ var
   Pivot, T: TSComplex;
   I, ti: Integer;
 
-  procedure qSort(var a: TSComplexDynArray; iLo, iHi: Integer;
-    var AIndexes: TIntegerDynArray);
+  procedure qSort(var a: TSComplexDynArray; iLo, iHi: Integer; var AIndexes: TIntegerDynArray);
   begin
     Lo := iLo;
     Hi := iHi;
@@ -1883,8 +1921,7 @@ begin
   qSort(Self, Low, High, AIndexes);
 end;
 
-procedure TSComplexDynArrayHelper.SortWithOrder(const AOrderIndexes
-  : TIntegerDynArray);
+procedure TSComplexDynArrayHelper.SortWithOrder(const AOrderIndexes: TIntegerDynArray);
 var
   I: Integer;
 begin
@@ -1893,8 +1930,7 @@ begin
   Resize(System.Length(AOrderIndexes));
 end;
 
-function TSComplexDynArrayHelper.ToString(const AFormatSettings
-  : TFormatSettings): string;
+function TSComplexDynArrayHelper.ToString(const AFormatSettings: TFormatSettings): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -1902,7 +1938,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TSComplexDynArrayHelper.ToString: string;
@@ -1913,12 +1949,10 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
-function TSComplexDynArrayHelper.ToString(const AFormat: TFloatFormat;
-  const APrecision, ADigits: Integer;
-  const AFormatSettings: TFormatSettings): string;
+function TSComplexDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -1926,11 +1960,10 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
-function TSComplexDynArrayHelper.ToString(const AFormat: TFloatFormat;
-  const APrecision, ADigits: Integer): string;
+function TSComplexDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -1938,7 +1971,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TSComplexDynArrayHelper._ToString(const ASeparator: string): string;
@@ -1949,7 +1982,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(ASeparator, R);
+  Result := '[' + string.Join(ASeparator, R) + ']';
 end;
 
 procedure TSComplexDynArrayHelper.ClearImag;
@@ -1985,19 +2018,14 @@ begin
     Self[I].SetValue(AVector[I]);
 end;
 
-constructor TSComplexDynArrayHelper.Create(const aVectorRe,
-  aVectorIm: TSingleDynArray);
+constructor TSComplexDynArrayHelper.Create(const AVectorRe, AVectorIm: TSingleDynArray);
 var
   I: Integer;
 begin
-  Self := TSComplexDynArray.Create(aVectorRe.Length);
+  Self := TSComplexDynArray.Create(AVectorRe.Length);
   for I := Low to High do
-    Self[I].SetValue(aVectorRe[I], aVectorIm[I]);
+    Self[I].SetValue(AVectorRe[I], AVectorIm[I]);
 end;
-
-///
-/// Extended
-///
 
 procedure TEComplexDynArrayHelper.Assign(const ASource: TEComplexDynArray);
 begin
@@ -2104,8 +2132,7 @@ begin
     Result[I] := -Self[I];
 end;
 
-function TEComplexDynArrayHelper.Equal(const AVector
-  : TEComplexDynArray): Boolean;
+function TEComplexDynArrayHelper.Equal(const AVector: TEComplexDynArray): Boolean;
 var
   L, I: Integer;
 begin
@@ -2119,10 +2146,9 @@ begin
   Result := I > L;
 end;
 
-function TEComplexDynArrayHelper.NotEqual(const AVector
-  : TEComplexDynArray): Boolean;
+function TEComplexDynArrayHelper.NotEqual(const AVector: TEComplexDynArray): Boolean;
 begin
-  Result := not(Self.Equal(AVector));
+  Result := not (Self.Equal(AVector));
 end;
 
 function TEComplexDynArrayHelper.Equal(const AValue: TEComplex): Boolean;
@@ -2136,7 +2162,7 @@ end;
 
 function TEComplexDynArrayHelper.NotEqual(const AValue: TEComplex): Boolean;
 begin
-  Result := not(Self.Equal(AValue));
+  Result := not (Self.Equal(AValue));
 end;
 
 constructor TEComplexDynArrayHelper.Base(const ALength, ANumber: Integer);
@@ -2151,7 +2177,7 @@ end;
 constructor TEComplexDynArrayHelper.Create(const AVector: TEComplexDynArray);
 begin
   Self := Nil;
-    Self := Copy(AVector);
+  Self := Copy(AVector);
 end;
 
 constructor TEComplexDynArrayHelper.Create(const AStart, AEnd, AStep: Integer);
@@ -2170,6 +2196,25 @@ constructor TEComplexDynArrayHelper.Create(const ALength: Integer);
 begin
   Self := Nil;
   Self.Length := ALength;
+end;
+
+class function TEComplexDynArrayHelper.Parse(const AVectorStr: string): TEComplexDynArray;
+var
+  LStrArray: TStringDynArray;
+  L: Integer;
+  I: Integer;
+begin
+  LStrArray := AVectorStr.Trim(UnexpectedSymbolsInMatrixOrVectors).Split([VectorItemDelimiter]);
+  L := System.Length(LStrArray);
+  Result := TEComplexDynArray.Create(L);
+  System.Dec(L);
+  for I := 0 to L do
+    Result[I] := TEComplex.Create(LStrArray[I]);
+end;
+
+constructor TEComplexDynArrayHelper.Create(const AVectorStr: string);
+begin
+  Self := TEComplexDynArray.Parse(AVectorStr);
 end;
 
 constructor TEComplexDynArrayHelper.Ones(const ALength: Integer);
@@ -2217,11 +2262,10 @@ var
 begin
   Assert(Assigned(AProc), 'Unassigned procedure');
   for I := Low to High do
-    AProc(Self[I]); // Check
+    AProc(Self[I]);
 end;
 
-function TEComplexDynArrayHelper.ForEach(const AProc: TEleventProc<TEComplex>)
-  : TEComplexDynArray;
+function TEComplexDynArrayHelper.ForEach(const AProc: TEleventProc<TEComplex>): TEComplexDynArray;
 begin
   Result := TEComplexDynArray.Create(Self);
   Result.Apply(AProc);
@@ -2270,8 +2314,7 @@ begin
   end;
 
   for I := AIndex + 1 to High do
-    if (Self[I] > Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity)
-    then
+    if (Self[I] > Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity) then
     begin
       Result := Self[I];
       AIndex := I
@@ -2314,8 +2357,7 @@ begin
     Result := Self[AIndex];
   end;
   for I := AIndex + 1 to High do
-    if (Self[I] < Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity)
-    then
+    if (Self[I] < Result) and (not Self[I].IsNaN) and (not Self[I].IsInfinity) then
     begin
       Result := Self[I];
       AIndex := I
@@ -2398,6 +2440,33 @@ begin
     Self[I] := Self[I].i1;
 end;
 
+function TEComplexDynArrayHelper.SqrAbs: TExtendedDynArray;
+var
+  I: Integer;
+begin
+  Result := TExtendedDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].SqrAbs;
+end;
+
+function TEComplexDynArrayHelper.Magnitude: TExtendedDynArray;
+var
+  I: Integer;
+begin
+  Result := TExtendedDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].Magnitude;
+end;
+
+function TEComplexDynArrayHelper.Angle: TExtendedDynArray;
+var
+  I: Integer;
+begin
+  Result := TExtendedDynArray.Create(Self.Length);
+  for I := Low to High do
+    Result[I] := Self[I].Angle;
+end;
+
 procedure TEComplexDynArrayHelper.Normalize;
 var
   D: TEComplex;
@@ -2426,8 +2495,7 @@ begin
     Result[I] := Self[I].Re;
 end;
 
-procedure TEComplexDynArrayHelper.Resize(const ALength: Integer;
-  const ASaveData: Boolean = true);
+procedure TEComplexDynArrayHelper.Resize(const ALength: Integer; const ASaveData: Boolean = true);
 begin
   if Length <> ALength then
     System.SetLength(Self, ALength);
@@ -2436,8 +2504,7 @@ begin
     Zero;
 end;
 
-procedure TEComplexDynArrayHelper.SetItem(const AIndex: Integer;
-  const AValue: TEComplex);
+procedure TEComplexDynArrayHelper.SetItem(const AIndex: Integer; const AValue: TEComplex);
 begin
   if not InRange(AIndex, Low, High) then
     raise EComplexVectorError.Create('Index not in range of vector bounds');
@@ -2615,8 +2682,7 @@ begin
   end;
 end;
 
-function TEComplexDynArrayHelper.DeleteIndexes(const AIndexes: TIntegerDynArray)
-  : TEComplexDynArray;
+function TEComplexDynArrayHelper.DeleteIndexes(const AIndexes: TIntegerDynArray): TEComplexDynArray;
 var
   J, L, K: Integer;
 begin
@@ -2634,8 +2700,7 @@ begin
   end;
 end;
 
-function TEComplexDynArrayHelper.DeleteValues(const AStates: TBooleanDynArray)
-  : TEComplexDynArray;
+function TEComplexDynArrayHelper.DeleteValues(const AStates: TBooleanDynArray): TEComplexDynArray;
 var
   I, LCounter: Integer;
 begin
@@ -2667,8 +2732,7 @@ var
   Pivot, T: TEComplex;
   I, ti: Integer;
 
-  procedure qSort(var a: TEComplexDynArray; iLo, iHi: Integer;
-    var AIndexes: TIntegerDynArray);
+  procedure qSort(var a: TEComplexDynArray; iLo, iHi: Integer; var AIndexes: TIntegerDynArray);
   begin
     Lo := iLo;
     Hi := iHi;
@@ -2704,8 +2768,7 @@ begin
   qSort(Self, Low, High, AIndexes);
 end;
 
-procedure TEComplexDynArrayHelper.SortWithOrder(const AOrderIndexes
-  : TIntegerDynArray);
+procedure TEComplexDynArrayHelper.SortWithOrder(const AOrderIndexes: TIntegerDynArray);
 var
   I: Integer;
 begin
@@ -2714,8 +2777,7 @@ begin
   Resize(System.Length(AOrderIndexes));
 end;
 
-function TEComplexDynArrayHelper.ToString(const AFormatSettings
-  : TFormatSettings): string;
+function TEComplexDynArrayHelper.ToString(const AFormatSettings: TFormatSettings): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -2723,7 +2785,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TEComplexDynArrayHelper.ToString: string;
@@ -2734,24 +2796,21 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
-function TEComplexDynArrayHelper.ToString(const AFormat: TFloatFormat;
-  const APrecision, ADigits: Integer;
-  const AFormatSettings: TFormatSettings): string;
+function TEComplexDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer; const AFormatSettings: TFormatSettings): string;
 var
   R: TStringDynArray;
   I: Integer;
 begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
-    R[I] := Self[I].ToString(AFormat, APrecision, ADigits,AFormatSettings);
-  Result := string.Join(VectorItemDelimiter, R);
+    R[I] := Self[I].ToString(AFormat, APrecision, ADigits, AFormatSettings);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
-function TEComplexDynArrayHelper.ToString(const AFormat: TFloatFormat;
-  const APrecision, ADigits: Integer): string;
+function TEComplexDynArrayHelper.ToString(const AFormat: TFloatFormat; const APrecision, ADigits: Integer): string;
 var
   R: TStringDynArray;
   I: Integer;
@@ -2759,7 +2818,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString(AFormat, APrecision, ADigits);
-  Result := string.Join(VectorItemDelimiter, R);
+  Result := '[' + string.Join(VectorItemDelimiter, R) + ']';
 end;
 
 function TEComplexDynArrayHelper._ToString(const ASeparator: string): string;
@@ -2770,7 +2829,7 @@ begin
   System.SetLength(R, Self.Length);
   for I := System.Low(R) to System.High(R) do
     R[I] := Self[I].ToString;
-  Result := string.Join(ASeparator, R);
+  Result := '[' + string.Join(ASeparator, R) + ']';
 end;
 
 procedure TEComplexDynArrayHelper.ClearImag;
@@ -2806,14 +2865,14 @@ begin
     Self[I].SetValue(AVector[I]);
 end;
 
-constructor TEComplexDynArrayHelper.Create(const aVectorRe,
-  aVectorIm: TExtendedDynArray);
+constructor TEComplexDynArrayHelper.Create(const AVectorRe, AVectorIm: TExtendedDynArray);
 var
   I: Integer;
 begin
-  Self := TEComplexDynArray.Create(aVectorRe.Length);
+  Self := TEComplexDynArray.Create(AVectorRe.Length);
   for I := Low to High do
-    Self[I].SetValue(aVectorRe[I], aVectorIm[I]);
+    Self[I].SetValue(AVectorRe[I], AVectorIm[I]);
 end;
 
 end.
+
